@@ -2,7 +2,7 @@ int [][] koma=new int [7][7];
 int [][] flag=new int [7][7];
 int [][] motigoma1=new int[2][6];
 int [][] motigoma2=new int[2][6];
-int komaflag=0;
+int komaflag=-1;
 int motikomaflag=0;
 int komacatchflag=0;
 int komaXflag=0;
@@ -1013,17 +1013,20 @@ void mousePressed()
       exit();
     }
   }
+if(komaflag==-1){
 
   if (mouseX>1150&&mouseX<1250&&mouseY>450&&mouseY<550)//自分サイコロを振る                          　ここから
   {
     dice1=(int)random(1, 7);
+    komaflag=0;
   }
-  if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
-  {
-    dice2=(int)random(1, 7);
-  }
+  //if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
+  //{
+  //  dice2=(int)random(1, 7);
+  //}
+}
 
-
+ else if(komaflag>=0){
   if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730)//歩を使う
   {
     if (motigoma1[0][0]==1) {
@@ -1166,25 +1169,32 @@ void mousePressed()
     komacatchflag=1;
   }
 
+
+  
+
   for (int x=0; x<7; x=x+1)
   {
     for (int y=0; y<7; y=y+1)
     {
       if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
       {
-        if (komacatchflag==1&&motikomaflag!=0) {                            //付け足し
+        if (komacatchflag==1&&motikomaflag!=0) {                            
           if (flag[x][y]==0)
           {
             flag[x][y]=motikomaflag;
             motikomaflag=0;
+            komaflag=-1;
             komacatchflag=0;
             teban=1-teban;
+            dice2=(int)random(1, 7);
             makeKOMAmovelist();
             enemystrategy();
+          }else{
+            komaflag=0;
           }
         }//ここまで
 
-        else if (komaflag!=0)
+        else if (komaflag>0)
         {
 
 
@@ -1196,7 +1206,7 @@ void mousePressed()
           if (komacheck(komaflag, komaXflag, komaYflag, x, y)==false)
           {
             flag[komaXflag][komaYflag]=komaflag;
-            komaflag=0;
+            komaflag=0;//クリックやり直し待ち
           } else {//動かす
 
             //駒とる
@@ -1263,8 +1273,9 @@ void mousePressed()
               }
 
               flag[x][y]=komaflag;
-              komaflag=0;
-              teban=1-teban;                        //手番変更
+              komaflag=-1;
+              teban=1-teban;         
+              dice2=(int)random(1, 7);//手番変更
             }
 
             draw();
@@ -1272,11 +1283,12 @@ void mousePressed()
             {
               makeKOMAmovelist();
               enemystrategy();
+              komaflag=-1;
             }
           }
         } else if (komaflag==0)
         {
-          komaflag=flag[x][y];
+          komaflag=flag[x][y];//クリックした駒を指す駒を指定する
           //flag[x][y]=0;
           komaXflag=x;
           komaYflag=y;
@@ -1284,6 +1296,8 @@ void mousePressed()
       }
     }
   }
+  
+}
 }
 
 void enemykomamove(int x, int y)
@@ -1347,13 +1361,19 @@ void enemykomamove(int x, int y)
 
   flag[x][y]=komaflag;
   komaflag=0;
-  teban=1-teban;                                                       //手番変更
+  teban=1-teban;      
+  dice2=(int)random(1, 7);
+  //手番変更
 }
 
 boolean komacheck(int k, int x1, int y1, int x2, int y2 ) {
   if (syouriflag==1)return false;//勝敗結果後
   if (syouriflag==2)return false;//勝敗結果後
   if (flag[x2][y2]==-1)return false;
+  
+  if(teban==0&&x2!=dice1&&dice1!=6)return false;
+  if(teban==1&&x2!=dice2&&dice2!=6)return false;
+  
   if (teban==0&&k>10)
   {
     return false;
