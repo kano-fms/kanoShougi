@@ -14,6 +14,8 @@ int [] hishaX;
 int [] hishaY;
 int [] kakuX;
 int [] kakuY;
+int dice1=1;
+int dice2=1;
 
 void setup()
 {
@@ -507,6 +509,95 @@ void draw()
   textSize(80);
   fill(0);
 
+  //サイコロ描画
+  fill(255);
+
+  rect(1150, 450, 100, 100);//自分サイコロ
+  if (dice1==1) {
+    fill(255, 0, 0);
+    ellipse(1200, 500, 50, 50);
+    fill(255);
+  } else if (dice1==2) {
+    fill(0);
+    ellipse(1175, 475, 20, 20);
+    ellipse(1225, 525, 20, 20);
+    fill(255);
+  } else if (dice1==3) {
+    fill(0);
+    ellipse(1175, 475, 20, 20);
+    ellipse(1200, 500, 20, 20);
+    ellipse(1225, 525, 20, 20);
+    fill(255);
+  } else if (dice1==4) {
+    fill(0);
+    ellipse(1175, 475, 20, 20);
+    ellipse(1225, 525, 20, 20);
+    ellipse(1175, 525, 20, 20);
+    ellipse(1225, 475, 20, 20);
+    fill(255);
+  } else if (dice1==5) {
+    fill(0);
+    ellipse(1175, 475, 20, 20);
+    ellipse(1225, 525, 20, 20);
+    ellipse(1200, 500, 20, 20);
+    ellipse(1175, 525, 20, 20);
+    ellipse(1225, 475, 20, 20);
+    fill(255);
+  } else if (dice1==6) {
+    fill(0);
+    ellipse(1175, 475, 20, 20);
+    ellipse(1225, 525, 20, 20);
+    ellipse(1175, 525, 20, 20);
+    ellipse(1225, 475, 20, 20);
+    ellipse(1175, 500, 20, 20);
+    ellipse(1225, 500, 20, 20);
+    fill(255);
+  }
+
+  rect(1350, 450, 100, 100);//相手サイコロ
+  if (dice2==1) {
+    fill(255, 0, 0);
+    ellipse(1400, 500, 50, 50);
+    fill(255);
+  } else if (dice2==2) {
+    fill(0);
+    ellipse(1375, 475, 20, 20);
+    ellipse(1425, 525, 20, 20);
+    fill(255);
+  } else if (dice2==3) {
+    fill(0);
+    ellipse(1375, 475, 20, 20);
+    ellipse(1400, 500, 20, 20);
+    ellipse(1425, 525, 20, 20);
+    fill(255);
+  } else if (dice2==4) {
+    fill(0);
+    ellipse(1375, 475, 20, 20);
+    ellipse(1425, 525, 20, 20);
+    ellipse(1375, 525, 20, 20);
+    ellipse(1425, 475, 20, 20);
+    fill(255);
+  } else if (dice2==5) {
+    fill(0);
+    ellipse(1375, 475, 20, 20);
+    ellipse(1425, 525, 20, 20);
+    ellipse(1400, 500, 20, 20);
+    ellipse(1375, 525, 20, 20);
+    ellipse(1425, 475, 20, 20);
+    fill(255);
+  } else if (dice2==6) {
+    fill(0);
+    ellipse(1375, 475, 20, 20);
+    ellipse(1425, 525, 20, 20);
+    ellipse(1375, 525, 20, 20);
+    ellipse(1425, 475, 20, 20);
+    ellipse(1375, 500, 20, 20);
+    ellipse(1425, 500, 20, 20);
+    fill(255);
+  }
+
+  fill(0);
+
   //駒自分
   for (int x=0; x<7; x=x+1)
   {
@@ -923,8 +1014,17 @@ void mousePressed()
     }
   }
 
+  if (mouseX>1150&&mouseX<1250&&mouseY>450&&mouseY<550)//自分サイコロを振る                          　ここから
+  {
+    dice1=(int)random(1, 7);
+  }
+  if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
+  {
+    dice2=(int)random(1, 7);
+  }
 
-  if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730)//歩を使う                          　ここから
+
+  if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730)//歩を使う
   {
     if (motigoma1[0][0]==1) {
       motikomaflag=1;
@@ -935,73 +1035,73 @@ void mousePressed()
   if (mouseX>1030&&mouseX<1130&&mouseY>790&&mouseY<890)//歩を使う
   {
     if (motigoma1[1][0]==1) {
-    motikomaflag=1;
-    motigoma1[1][0]=0;
-    komacatchflag=1;
+      motikomaflag=1;
+      motigoma1[1][0]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1130&&mouseX<1230&&mouseY>630&&mouseY<730)//銀を使う
   {
     if (motigoma1[0][1]==1) {
-    motikomaflag=2;
-    motigoma1[0][1]=0;
-    komacatchflag=1;
+      motikomaflag=2;
+      motigoma1[0][1]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1130&&mouseX<1230&&mouseY>790&&mouseY<890)//銀を使う
   {
     if (motigoma1[1][1]==1) {
-    motikomaflag=2;
-    motigoma1[1][1]=0;
-    komacatchflag=1;
+      motikomaflag=2;
+      motigoma1[1][1]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1230&&mouseX<1330&&mouseY>630&&mouseY<730)//金を使う
   {
     if (motigoma1[0][2]==1) {
-    motikomaflag=3;
-    motigoma1[0][2]=0;
-    komacatchflag=1;
+      motikomaflag=3;
+      motigoma1[0][2]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1230&&mouseX<1330&&mouseY>790&&mouseY<890)//金を使う
   {
     if (motigoma1[1][2]==1) {
-    motikomaflag=3;
-    motigoma1[1][2]=0;
-    komacatchflag=1;
+      motikomaflag=3;
+      motigoma1[1][2]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1330&&mouseX<1430&&mouseY>630&&mouseY<730)//角を使う
   {
     if (motigoma1[0][3]==1) {
-    motikomaflag=4;
-    motigoma1[0][3]=0;
-    komacatchflag=1;
+      motikomaflag=4;
+      motigoma1[0][3]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1330&&mouseX<1430&&mouseY>790&&mouseY<890)//角を使う
   {
     if (motigoma1[1][3]==1) {
-    motikomaflag=4;
-    motigoma1[1][3]=0;
-    komacatchflag=1;
+      motikomaflag=4;
+      motigoma1[1][3]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1430&&mouseX<1530&&mouseY>630&&mouseY<730)//飛を使う
   {
     if (motigoma1[0][4]==1) {
-    motikomaflag=5;
-    motigoma1[0][4]=0;
-    komacatchflag=1;
+      motikomaflag=5;
+      motigoma1[0][4]=0;
+      komacatchflag=1;
     }
   }
   if (mouseX>1430&&mouseX<1530&&mouseY>790&&mouseY<890)//飛を使う                          　ここまで
   {
     if (motigoma1[1][4]==1) {
-    motikomaflag=5;
-    motigoma1[1][4]=0;
-    komacatchflag=1;
+      motikomaflag=5;
+      motigoma1[1][4]=0;
+      komacatchflag=1;
     }
   }
 
@@ -1086,7 +1186,7 @@ void mousePressed()
 
         else if (komaflag!=0)
         {
-          
+
 
 
           //動かせるかチェック
