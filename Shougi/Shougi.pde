@@ -83,14 +83,14 @@ void draw()
 
   for (int x=0; x<7; x++) {//動かせる位置の色変え
     for (int y=0; y<7; y++) {
-      if (flag[x][y]==1&&komaflag==1&&dist((x-1)*160+180, (y-1)*160+180, mouseX, mouseY)<160) {//歩
+      if (flag[x][y]==1&&komaflag==1) {//歩
         fill(230, 180, 0);
         if (flag[x][y-1]==0||flag[x][y-1]>10) {
           rect((x-1)*160+100, (y-2)*160+100, 160, 160);
         }
         fill(200, 125, 0);
       }
-      if (flag[x][y]==2&&komaflag==2&&dist((x-1)*160+180, (y-1)*160+180, mouseX, mouseY)<160) {//銀
+      if (flag[x][y]==2&&komaflag==2) {//銀
         fill(230, 180, 0);
         if (flag[x][y-1]==0||flag[x][y-1]>10) {
           rect((x-1)*160+100, (y-2)*160+100, 160, 160);
@@ -1013,291 +1013,299 @@ void mousePressed()
       exit();
     }
   }
-if(komaflag==-1){
+  if (komaflag==-1) {
 
-  if (mouseX>1150&&mouseX<1250&&mouseY>450&&mouseY<550)//自分サイコロを振る                          　ここから
-  {
-    dice1=(int)random(1, 7);
-    komaflag=0;
-  }
-  //if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
-  //{
-  //  dice2=(int)random(1, 7);
-  //}
-}
-
- else if(komaflag>=0){
-  if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730)//歩を使う
-  {
-    if (motigoma1[0][0]==1) {
-      motikomaflag=1;
-      motigoma1[0][0]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1030&&mouseX<1130&&mouseY>790&&mouseY<890)//歩を使う
-  {
-    if (motigoma1[1][0]==1) {
-      motikomaflag=1;
-      motigoma1[1][0]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1130&&mouseX<1230&&mouseY>630&&mouseY<730)//銀を使う
-  {
-    if (motigoma1[0][1]==1) {
-      motikomaflag=2;
-      motigoma1[0][1]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1130&&mouseX<1230&&mouseY>790&&mouseY<890)//銀を使う
-  {
-    if (motigoma1[1][1]==1) {
-      motikomaflag=2;
-      motigoma1[1][1]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1230&&mouseX<1330&&mouseY>630&&mouseY<730)//金を使う
-  {
-    if (motigoma1[0][2]==1) {
-      motikomaflag=3;
-      motigoma1[0][2]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1230&&mouseX<1330&&mouseY>790&&mouseY<890)//金を使う
-  {
-    if (motigoma1[1][2]==1) {
-      motikomaflag=3;
-      motigoma1[1][2]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1330&&mouseX<1430&&mouseY>630&&mouseY<730)//角を使う
-  {
-    if (motigoma1[0][3]==1) {
-      motikomaflag=4;
-      motigoma1[0][3]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1330&&mouseX<1430&&mouseY>790&&mouseY<890)//角を使う
-  {
-    if (motigoma1[1][3]==1) {
-      motikomaflag=4;
-      motigoma1[1][3]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1430&&mouseX<1530&&mouseY>630&&mouseY<730)//飛を使う
-  {
-    if (motigoma1[0][4]==1) {
-      motikomaflag=5;
-      motigoma1[0][4]=0;
-      komacatchflag=1;
-    }
-  }
-  if (mouseX>1430&&mouseX<1530&&mouseY>790&&mouseY<890)//飛を使う                          　ここまで
-  {
-    if (motigoma1[1][4]==1) {
-      motikomaflag=5;
-      motigoma1[1][4]=0;
-      komacatchflag=1;
-    }
-  }
-
-  if (mouseX>1030&&mouseX<1130&&mouseY>270&&mouseY<370)//歩を使われる
-  {
-    motikomaflag=11;
-    motigoma2[0][0]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1030&&mouseX<1130&&mouseY>110&&mouseY<210)//歩を使われる
-  {
-    motikomaflag=11;
-    motigoma2[1][0]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1130&&mouseX<1230&&mouseY>270&&mouseY<370)//銀を使われる
-  {
-    motikomaflag=12;
-    motigoma2[0][1]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1130&&mouseX<1230&&mouseY>110&&mouseY<210)//銀を使われる
-  {
-    motikomaflag=12;
-    motigoma2[1][1]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1230&&mouseX<1330&&mouseY>270&&mouseY<370)//金を使われる
-  {
-    motikomaflag=13;
-    motigoma2[0][2]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1230&&mouseX<1330&&mouseY>110&&mouseY<210)//金を使われる
-  {
-    motikomaflag=13;
-    motigoma2[1][2]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1330&&mouseX<1430&&mouseY>270&&mouseY<370)//角を使われる
-  {
-    motikomaflag=14;
-    motigoma2[0][3]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1330&&mouseX<1430&&mouseY>110&&mouseY<210)//角を使われる
-  {
-    motikomaflag=14;
-    motigoma2[1][3]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1430&&mouseX<1530&&mouseY>270&&mouseY<370)//飛を使われる
-  {
-    motikomaflag=15;
-    motigoma2[0][4]=0;
-    komacatchflag=1;
-  }
-  if (mouseX>1430&&mouseX<1530&&mouseY>110&&mouseY<210)//飛を使われる
-  {
-    motikomaflag=15;
-    motigoma2[1][4]=0;
-    komacatchflag=1;
-  }
-
-
-  
-
-  for (int x=0; x<7; x=x+1)
-  {
-    for (int y=0; y<7; y=y+1)
+    if (mouseX>1150&&mouseX<1250&&mouseY>450&&mouseY<550)//自分サイコロを振る                          　ここから
     {
-      if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
+      dice1=(int)random(1, 7);
+      komaflag=0;
+    }
+    //if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
+    //{
+    //  dice2=(int)random(1, 7);
+    //}
+  } else if (komaflag>=0) {
+    if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730&&komacatchflag==0)//歩を使う
+    {
+      if (motigoma1[0][0]==1) {
+        motikomaflag=1;
+        motigoma1[0][0]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1030&&mouseX<1130&&mouseY>790&&mouseY<890&&komacatchflag==0)//歩を使う
+    {
+      if (motigoma1[1][0]==1) {
+        motikomaflag=1;
+        motigoma1[1][0]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1130&&mouseX<1230&&mouseY>630&&mouseY<730&&komacatchflag==0)//銀を使う
+    {
+      if (motigoma1[0][1]==1) {
+        motikomaflag=2;
+        motigoma1[0][1]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1130&&mouseX<1230&&mouseY>790&&mouseY<890&&komacatchflag==0)//銀を使う
+    {
+      if (motigoma1[1][1]==1) {
+        motikomaflag=2;
+        motigoma1[1][1]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1230&&mouseX<1330&&mouseY>630&&mouseY<730&&komacatchflag==0)//金を使う
+    {
+      if (motigoma1[0][2]==1) {
+        motikomaflag=3;
+        motigoma1[0][2]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1230&&mouseX<1330&&mouseY>790&&mouseY<890&&komacatchflag==0)//金を使う
+    {
+      if (motigoma1[1][2]==1) {
+        motikomaflag=3;
+        motigoma1[1][2]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1330&&mouseX<1430&&mouseY>630&&mouseY<730&&komacatchflag==0)//角を使う
+    {
+      if (motigoma1[0][3]==1) {
+        motikomaflag=4;
+        motigoma1[0][3]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1330&&mouseX<1430&&mouseY>790&&mouseY<890&&komacatchflag==0)//角を使う
+    {
+      if (motigoma1[1][3]==1) {
+        motikomaflag=4;
+        motigoma1[1][3]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1430&&mouseX<1530&&mouseY>630&&mouseY<730&&komacatchflag==0)//飛を使う
+    {
+      if (motigoma1[0][4]==1) {
+        motikomaflag=5;
+        motigoma1[0][4]=0;
+        komacatchflag=1;
+      }
+    }
+    if (mouseX>1430&&mouseX<1530&&mouseY>790&&mouseY<890&&komacatchflag==0)//飛を使う                          　ここまで
+    {
+      if (motigoma1[1][4]==1) {
+        motikomaflag=5;
+        motigoma1[1][4]=0;
+        komacatchflag=1;
+      }
+    }
+
+    if (mouseX>1030&&mouseX<1130&&mouseY>270&&mouseY<370)//歩を使われる
+    {
+      motikomaflag=11;
+      motigoma2[0][0]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1030&&mouseX<1130&&mouseY>110&&mouseY<210)//歩を使われる
+    {
+      motikomaflag=11;
+      motigoma2[1][0]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1130&&mouseX<1230&&mouseY>270&&mouseY<370)//銀を使われる
+    {
+      motikomaflag=12;
+      motigoma2[0][1]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1130&&mouseX<1230&&mouseY>110&&mouseY<210)//銀を使われる
+    {
+      motikomaflag=12;
+      motigoma2[1][1]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1230&&mouseX<1330&&mouseY>270&&mouseY<370)//金を使われる
+    {
+      motikomaflag=13;
+      motigoma2[0][2]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1230&&mouseX<1330&&mouseY>110&&mouseY<210)//金を使われる
+    {
+      motikomaflag=13;
+      motigoma2[1][2]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1330&&mouseX<1430&&mouseY>270&&mouseY<370)//角を使われる
+    {
+      motikomaflag=14;
+      motigoma2[0][3]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1330&&mouseX<1430&&mouseY>110&&mouseY<210)//角を使われる
+    {
+      motikomaflag=14;
+      motigoma2[1][3]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1430&&mouseX<1530&&mouseY>270&&mouseY<370)//飛を使われる
+    {
+      motikomaflag=15;
+      motigoma2[0][4]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1430&&mouseX<1530&&mouseY>110&&mouseY<210)//飛を使われる
+    {
+      motikomaflag=15;
+      motigoma2[1][4]=0;
+      komacatchflag=1;
+    }
+
+
+
+
+    for (int x=0; x<7; x=x+1)
+    {
+      for (int y=0; y<7; y=y+1)
       {
-        if (komacatchflag==1&&motikomaflag!=0) {                            
-          if (flag[x][y]==0)
-          {
-            flag[x][y]=motikomaflag;
-            motikomaflag=0;
-            komaflag=-1;
-            komacatchflag=0;
-            teban=1-teban;
-            dice2=(int)random(1, 7);
-            makeKOMAmovelist();
-            enemystrategy();
-          }else{
-            komaflag=0;
-          }
-        }//ここまで
-
-        else if (komaflag>0)
+        if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
-
-
-
-          //動かせるかチェック
-          flag[komaXflag][komaYflag]=0;
-          println(komacheck(komaflag, komaXflag, komaYflag, x, y));
-          println(teban);
-          if (komacheck(komaflag, komaXflag, komaYflag, x, y)==false)
-          {
-            flag[komaXflag][komaYflag]=komaflag;
-            komaflag=0;//クリックやり直し待ち
-          } else {//動かす
-
-            //駒とる
-            if (teban==1) {
-              enemykomamove(x, y);
-            } else if (teban==0)                                                    //ここ?
+          if (komacatchflag==1&&motikomaflag!=0) {         
+            if (motikomaflag==1&&flag[x][y]==0&&x==dice1) {                                                              
+              if (y>0) {
+                flag[x][y]=motikomaflag;
+                motikomaflag=0;
+                komaflag=-1;
+                komacatchflag=0;
+                teban=1-teban;
+                dice2=(int)random(1, 7);
+                makeKOMAmovelist();
+                enemystrategy();
+              }
+            } else if (motikomaflag!=1&&flag[x][y]==0&&x==dice1)
             {
-
-
-              if (flag[x][y]==11||flag[x][y]==17)//歩とる
-              {
-                if (motigoma1[0][0]==0)
-                {
-                  motigoma1[0][0]=1;
-                } else if (motigoma1[0][0]==1)
-                {
-                  motigoma1[1][0]=1;
-                }
-              }
-              if (flag[x][y]==12||flag[x][y]==20)//銀とる
-              {
-                if (motigoma1[0][1]==0)
-                {
-                  motigoma1[0][1]=1;
-                } else if (motigoma1[0][1]==1)
-                {
-                  motigoma1[1][1]=1;
-                }
-              }
-              if (flag[x][y]==13)//金とる
-              {
-                if (motigoma1[0][2]==0)
-                {
-                  motigoma1[0][2]=1;
-                } else if (motigoma1[0][2]==1)
-                {
-                  motigoma1[1][2]=1;
-                }
-              }
-              if (flag[x][y]==14||flag[x][y]==18)//角とる
-              {
-                if (motigoma1[0][3]==0)
-                {
-                  motigoma1[0][3]=1;
-                } else if (motigoma1[0][3]==1)
-                {
-                  motigoma1[1][3]=1;
-                }
-              }
-              if (flag[x][y]==15||flag[x][y]==19)//飛とる
-              {
-                if (motigoma1[0][4]==0)
-                {
-                  motigoma1[0][4]=1;
-                } else if (motigoma1[0][4]==1)
-                {
-                  motigoma1[1][4]=1;
-                }
-              }
-              if (flag[x][y]==16)//玉とる
-              {
-                //自分勝ち
-                syouriflag=1;
-              }
-
-              flag[x][y]=komaflag;
+              flag[x][y]=motikomaflag;
+              motikomaflag=0;
               komaflag=-1;
-              teban=1-teban;         
-              dice2=(int)random(1, 7);//手番変更
-            }
-
-            draw();
-            if (teban==1)
-            {
+              komacatchflag=0;
+              teban=1-teban;
+              dice2=(int)random(1, 7);
               makeKOMAmovelist();
               enemystrategy();
-              komaflag=-1;
+            } else {
+              komaflag=0;
             }
+          }//ここまで
+
+          else if (komaflag>0)
+          {
+
+
+
+            //動かせるかチェック
+            flag[komaXflag][komaYflag]=0;
+            println(komacheck(komaflag, komaXflag, komaYflag, x, y));
+            println(teban);
+            if (komacheck(komaflag, komaXflag, komaYflag, x, y)==false)
+            {
+              flag[komaXflag][komaYflag]=komaflag;
+              komaflag=0;//クリックやり直し待ち
+            } else {//動かす
+
+              //駒とる
+              if (teban==1) {
+                enemykomamove(x, y);
+              } else if (teban==0)                                                    //ここ?
+              {
+
+
+                if (flag[x][y]==11||flag[x][y]==17)//歩とる
+                {
+                  if (motigoma1[0][0]==0)
+                  {
+                    motigoma1[0][0]=1;
+                  } else if (motigoma1[0][0]==1)
+                  {
+                    motigoma1[1][0]=1;
+                  }
+                }
+                if (flag[x][y]==12||flag[x][y]==20)//銀とる
+                {
+                  if (motigoma1[0][1]==0)
+                  {
+                    motigoma1[0][1]=1;
+                  } else if (motigoma1[0][1]==1)
+                  {
+                    motigoma1[1][1]=1;
+                  }
+                }
+                if (flag[x][y]==13)//金とる
+                {
+                  if (motigoma1[0][2]==0)
+                  {
+                    motigoma1[0][2]=1;
+                  } else if (motigoma1[0][2]==1)
+                  {
+                    motigoma1[1][2]=1;
+                  }
+                }
+                if (flag[x][y]==14||flag[x][y]==18)//角とる
+                {
+                  if (motigoma1[0][3]==0)
+                  {
+                    motigoma1[0][3]=1;
+                  } else if (motigoma1[0][3]==1)
+                  {
+                    motigoma1[1][3]=1;
+                  }
+                }
+                if (flag[x][y]==15||flag[x][y]==19)//飛とる
+                {
+                  if (motigoma1[0][4]==0)
+                  {
+                    motigoma1[0][4]=1;
+                  } else if (motigoma1[0][4]==1)
+                  {
+                    motigoma1[1][4]=1;
+                  }
+                }
+                if (flag[x][y]==16)//玉とる
+                {
+                  //自分勝ち
+                  syouriflag=1;
+                }
+
+                flag[x][y]=komaflag;
+                komaflag=-1;
+                teban=1-teban;  
+                dice2=(int)random(1, 7);//手番変更
+              }
+
+              draw();
+              if (teban==1)
+              {
+                makeKOMAmovelist();
+                enemystrategy();
+                komaflag=-1;
+              }
+            }
+          } else if (komaflag==0)
+          {
+            komaflag=flag[x][y];//クリックした駒を指す駒を指定する
+            //flag[x][y]=0;
+            komaXflag=x;
+            komaYflag=y;
           }
-        } else if (komaflag==0)
-        {
-          komaflag=flag[x][y];//クリックした駒を指す駒を指定する
-          //flag[x][y]=0;
-          komaXflag=x;
-          komaYflag=y;
         }
       }
     }
   }
-  
-}
 }
 
 void enemykomamove(int x, int y)
@@ -1362,7 +1370,7 @@ void enemykomamove(int x, int y)
   flag[x][y]=komaflag;
   komaflag=0;
   teban=1-teban;      
-  dice2=(int)random(1, 7);
+  //dice2=(int)random(1, 7);
   //手番変更
 }
 
@@ -1370,10 +1378,10 @@ boolean komacheck(int k, int x1, int y1, int x2, int y2 ) {
   if (syouriflag==1)return false;//勝敗結果後
   if (syouriflag==2)return false;//勝敗結果後
   if (flag[x2][y2]==-1)return false;
-  
-  if(teban==0&&x2!=dice1&&dice1!=6)return false;
-  if(teban==1&&x2!=dice2&&dice2!=6)return false;
-  
+
+  if (teban==0&&x2!=dice1&&dice1!=6)return false;
+  if (teban==1&&x2!=dice2&&dice2!=6)return false;
+
   if (teban==0&&k>10)
   {
     return false;
