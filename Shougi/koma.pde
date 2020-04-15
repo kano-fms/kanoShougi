@@ -35,3 +35,42 @@ void koma_reset() {
   flag[1][1]=15;
   flag[5][1]=16;
 }
+
+void koma_nari(){
+  for (int n=0; n<7; n=n+1)
+  {
+    if (flag[n][1]==1)
+    {
+      flag[n][1]=7;//自分と
+    }
+    if (flag[n][1]==2)
+    {
+      flag[n][1]=10;//自分成銀
+    }
+    if (flag[n][1]==4)
+    {
+      flag[n][1]=8;//自分馬
+    }
+    if (flag[n][1]==5)
+    {
+      flag[n][1]=9;//自分龍
+    }
+
+    if (flag[n][5]==11)
+    {
+      flag[n][5]=17;//相手と
+    }
+    if (flag[n][5]==12)
+    {
+      flag[n][5]=20;//相手成銀
+    }
+    if (flag[n][5]==14)
+    {
+      flag[n][5]=18;//相手馬
+    }
+    if (flag[n][5]==15)
+    {
+      flag[n][5]=19;//相手龍
+    }
+  }
+}
