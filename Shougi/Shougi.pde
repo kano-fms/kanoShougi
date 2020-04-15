@@ -18,6 +18,23 @@ int dice1=1;
 int dice2=1;
 boolean autodice=false;
 
+enum PHASE{
+  Player1Start,
+  Player1Dice,
+  Player1Strategy,
+  Player1Move,
+  Player1Procedure,
+  Player2Start,
+  Player2Dice,
+  Player2Strategy,
+  Player2Move,
+  Player2Procedure
+} 
+
+PHASE phase = PHASE.Player1Start;
+
+
+
 void setup()
 {
   size(1700, 1000);
