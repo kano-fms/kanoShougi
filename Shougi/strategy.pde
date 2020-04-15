@@ -1,4 +1,4 @@
-boolean enemystrategy() //<>// //<>// //<>// //<>//
+boolean enemystrategy() //<>// //<>// //<>// //<>// //<>//
 {
   //ランダムに選ぶ
   int count=komamovelist.size();
