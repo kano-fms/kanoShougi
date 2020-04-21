@@ -1196,7 +1196,7 @@ void mousePressed()
         if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
           if (komacatchflag==1&&motikomaflag!=0) {         
-            if (motikomaflag==1&&flag[x][y]==0&&x==dice1) {                                                              
+            if ((motikomaflag==1&&flag[x][y]==0&&x==dice1&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1)) {                                                              
               if (y>0) {
                 flag[x][y]=motikomaflag;
                 motikomaflag=0;
@@ -1232,41 +1232,41 @@ void mousePressed()
                 makeKOMAmovelist();
                 enemystrategy();
               }
-            } else if (motikomaflag!=1&&flag[x][y]==0&&x==dice1)
-            {
-              flag[x][y]=motikomaflag;
-              motikomaflag=0;
-              komaflag=-1;
-              komacatchflag=0;
-              teban=1-teban;
-              if (autodice==true) {
-                dice2=(int)random(1, 7);
-              } else {
-                while (!keyPressed) {
-                  if (key=='1') {
-                    dice2=1;
-                    break;
-                  } else if (key=='2') {
-                    dice2=2;
-                    break;
-                  } else if (key=='3') {
-                    dice2=3;
-                    break;
-                  } else if (key=='4') {
-                    dice2=4;
-                    break;
-                  } else if (key=='5') {
-                    dice2=5;
-                    break;
-                  } else if (key=='6') {
-                    dice2=6;
-                    break;
-                  } else {
-                  }
-                }
-              }
-              makeKOMAmovelist();
-              enemystrategy();
+            //} else if (motikomaflag!=1&&flag[x][y]==0&&x==dice1)
+            //{
+            //  flag[x][y]=motikomaflag;
+            //  motikomaflag=0;
+            //  komaflag=-1;
+            //  komacatchflag=0;
+            //  teban=1-teban;
+            //  if (autodice==true) {
+            //    dice2=(int)random(1, 7);
+            //  } else {
+            //    while (!keyPressed) {
+            //      if (key=='1') {
+            //        dice2=1;
+            //        break;
+            //      } else if (key=='2') {
+            //        dice2=2;
+            //        break;
+            //      } else if (key=='3') {
+            //        dice2=3;
+            //        break;
+            //      } else if (key=='4') {
+            //        dice2=4;
+            //        break;
+            //      } else if (key=='5') {
+            //        dice2=5;
+            //        break;
+            //      } else if (key=='6') {
+            //        dice2=6;
+            //        break;
+            //      } else {
+            //      }
+            //    }
+            //  }
+            //  makeKOMAmovelist();
+            //  enemystrategy();
             } else {
               komaflag=0;
             }
