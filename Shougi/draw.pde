@@ -923,4 +923,20 @@ void draw()
   if (phase==PHASE.Player1Start) {
     phase = PHASE.Player1Dice;
   }
+  
+  if (phase==PHASE.Player1Strategy) {
+    phase = PHASE.Player1Tenitoru;
+  }
+  
+   if (phase==PHASE.Player2Start) {
+    phase = PHASE.Player2Dice;
+  }
+  
+  if (phase==PHASE.Player2Strategy) {
+    makeKOMAmovelist();
+    enemystrategy();
+    komaflag=-1;
+    teban=0;
+    phase = PHASE.Player1Start;
+  }
 }
