@@ -933,10 +933,12 @@ void draw()
   }
   
   if (phase==PHASE.Player2Strategy) {
+    byou=millis();
     makeKOMAmovelist();
     enemystrategy();
     komaflag=-1;
     teban=0;
     phase = PHASE.Player1Start;
+    println((millis()-byou)+"ms");
   }
 }

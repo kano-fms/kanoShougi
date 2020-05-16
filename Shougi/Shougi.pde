@@ -31,11 +31,17 @@ enum PHASE {
     Player2Sasu
 } 
 
+float byou=millis();
+
 PHASE phase = PHASE.Player1Start;
 
 void setup()
 {
   size(1700, 1000);
+
+
+  //teban=1;//先手後手の入れ替え
+  //phase = PHASE.Player2Start;
 
   hishaX=new int[]{1, 0, -1, 0};
   hishaY=new int[]{0, 1, 0, -1};
@@ -80,7 +86,59 @@ void setup()
   flag[5][1]=16;
 }
 
-
+void keyPressed() {
+  if (phase==PHASE.Player1Dice) {//プレイヤー1がダイスを振る
+    if (key=='1') {
+      dice1=1;
+      komaflag=0;
+      phase = PHASE.Player1Strategy;
+    } else if (key=='2') {
+      dice1=2;
+      komaflag=0;
+      phase = PHASE.Player1Strategy;
+    } else if (key=='3') {
+      dice1=3;
+      komaflag=0;
+      phase = PHASE.Player1Strategy;
+    } else if (key=='4') {
+      dice1=4;
+      komaflag=0;
+      phase = PHASE.Player1Strategy;
+    } else if (key=='5') {
+      dice1=5;
+      komaflag=0;
+      phase = PHASE.Player1Strategy;
+    } else if (key=='6') {
+      dice1=6;
+      komaflag=0;
+      phase = PHASE.Player1Strategy;
+    } else {
+    }
+  }
+  
+  if (phase==PHASE.Player2Dice) {//プレイヤー２がダイスを振る
+    if (key=='1') {
+      dice2=1;
+      phase = PHASE.Player2Strategy;
+    } else if (key=='2') {
+      dice2=2;
+      phase = PHASE.Player2Strategy;
+    } else if (key=='3') {
+      dice2=3;
+      phase = PHASE.Player2Strategy;
+    } else if (key=='4') {
+      dice2=4;
+      phase = PHASE.Player2Strategy;
+    } else if (key=='5') {
+      dice2=5;
+      phase = PHASE.Player2Strategy;
+    } else if (key=='6') {
+      dice2=6;
+      phase = PHASE.Player2Strategy;
+    } else {
+    }
+  }
+}
 
 void mousePressed()
 {
@@ -103,18 +161,13 @@ void mousePressed()
       komaflag=0;
       phase = PHASE.Player1Strategy;
     }
-  }
-
-  if (phase==PHASE.Player2Dice&&komaflag==-1) {
+  } else if (phase==PHASE.Player2Dice&&komaflag==-1) {
     if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
     {
       dice2=(int)random(1, 7);
       phase = PHASE.Player2Strategy;
     }
-  }
-
-
-  if (komaflag==0&&phase==PHASE.Player1Tenitoru)
+  } else if (komaflag==0&&phase==PHASE.Player1Tenitoru)
   {
     for (int x=0; x<7; x=x+1)
     {
@@ -123,6 +176,7 @@ void mousePressed()
         if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
           if (flag[x][y]<11&&flag[x][y]>0) {//自分の駒をクリックした場合
+            //println(phase);
             komaflag=flag[x][y];//クリックした駒を指す駒を指定する
             //flag[x][y]=0;
             komaXflag=x;
@@ -132,9 +186,9 @@ void mousePressed()
         }
       }
     }
-  }
+    //}
 
-  if (phase==PHASE.Player1Tenitoru&&komaflag>=0) {
+    //else if (phase==PHASE.Player1Tenitoru&&komaflag>=0) {
 
     if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730&&komacatchflag==0)//歩を使う
     {
@@ -226,11 +280,7 @@ void mousePressed()
         phase=PHASE.Player1Sasu;
       }
     }
-  }
-
-
-
-  if (phase==PHASE.Player2Tenitoru&&komaflag>=0) {//駒台から駒をつまむ
+  } else if (phase==PHASE.Player2Tenitoru&&komaflag>=0) {//駒台から駒をつまむ
 
     if (mouseX>1030&&mouseX<1130&&mouseY>270&&mouseY<370)//歩を使われる
     {
@@ -292,40 +342,7 @@ void mousePressed()
       motigoma2[1][4]=0;
       komacatchflag=1;
     }
-  }
-
-  if (phase==PHASE.Player2Dice) {//プレイヤー２がダイスを振る
-    if (autodice==true) {
-      dice2=(int)random(1, 7);
-    } else {
-      while (!keyPressed) {
-        if (key=='1') {
-          dice2=1;
-          break;
-        } else if (key=='2') {
-          dice2=2;
-          break;
-        } else if (key=='3') {
-          dice2=3;
-          break;
-        } else if (key=='4') {
-          dice2=4;
-          break;
-        } else if (key=='5') {
-          dice2=5;
-          break;
-        } else if (key=='6') {
-          dice2=6;
-          break;
-        } else {
-        }
-      }
-    }
-  }
-  
-
-
-  if (phase==PHASE.Player1Sasu&&komaflag>=0) {
+  } else if (phase==PHASE.Player1Sasu&&komaflag>=0) {
 
     for (int x=0; x<7; x=x+1)
     {
@@ -351,7 +368,7 @@ void mousePressed()
           {
 
 
-
+            println(komaflag, komaXflag, komaYflag, x, y);
             //動かせるかチェック
             flag[komaXflag][komaYflag]=0;
             println(komacheck(komaflag, komaXflag, komaYflag, x, y));
@@ -438,7 +455,7 @@ void mousePressed()
               //{
               //  makeKOMAmovelist();
               //  enemystrategy();
-              
+
               //  komaflag=-1;
               //}
             }
