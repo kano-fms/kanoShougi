@@ -53,7 +53,7 @@ boolean makeKOMAmovelist()
         for(int y=1; y<=5; y++){
         if(flag[x][y]==0&&(x==dice2||dice2==6||dice2musidekiru)){
           komamovelist.add(new komamove(13, 6, 1, x, y));
-        }||dice2musidekiru
+        }
       }
       }
     }
