@@ -16,6 +16,8 @@ int [] kakuX;
 int [] kakuY;
 int dice1=1;
 int dice2=1;
+boolean dice1musidekiru;
+boolean dice2musidekiru;
 boolean autodice=false;
 
 enum PHASE {
@@ -115,8 +117,9 @@ void keyPressed() {
     } else {
     }
   }
-  
+
   if (phase==PHASE.Player2Dice) {//プレイヤー２がダイスを振る
+    dice2musidekiru=false;
     if (key=='1') {
       dice2=1;
       phase = PHASE.Player2Strategy;
@@ -136,6 +139,9 @@ void keyPressed() {
       dice2=6;
       phase = PHASE.Player2Strategy;
     } else {
+    }
+    if (ootekakatteru()) {
+      dice2musidekiru=true;
     }
   }
 }
@@ -164,7 +170,11 @@ void mousePressed()
   } else if (phase==PHASE.Player2Dice&&komaflag==-1) {
     if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
     {
+      dice2musidekiru=false;
       dice2=(int)random(1, 7);
+      if (ootekakatteru()) {
+        dice2musidekiru=true;
+      }
       phase = PHASE.Player2Strategy;
     }
   } else if (komaflag==0&&phase==PHASE.Player1Tenitoru)
@@ -537,8 +547,8 @@ boolean komacheck(int k, int x1, int y1, int x2, int y2 ) {
   if (syouriflag==2)return false;//勝敗結果後
   if (flag[x2][y2]==-1)return false;
 
-  if (teban==0&&x2!=dice1&&dice1!=6)return false;
-  if (teban==1&&x2!=dice2&&dice2!=6)return false;
+  if (teban==0&&x2!=dice1&&dice1!=6)return false;                       //&&dice1musidekiru==false追加予定
+  if (teban==1&&x2!=dice2&&dice2!=6&&dice2musidekiru==false)return false;
 
   if (teban==0&&k>10)
   {
