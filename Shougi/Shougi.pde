@@ -7,6 +7,8 @@ int motikomaflag=0;
 int komacatchflag=0;
 int komaXflag=0;
 int komaYflag=0;
+int komaNariX;
+int komaNariY;
 int h1=0;
 int teban=0;//0は自分、1は相手
 int syouriflag=0;
@@ -26,6 +28,7 @@ enum PHASE {
     Player1Strategy, 
     Player1Tenitoru, 
     Player1Sasu, 
+    Player1Narimachi, 
     Player2Start, 
     Player2Dice, 
     Player2Strategy, 
@@ -379,6 +382,9 @@ void mousePressed()
 
 
             println(komaflag, komaXflag, komaYflag, x, y);
+            komaNariX=x;
+            komaNariY=y;
+
             //動かせるかチェック
             flag[komaXflag][komaYflag]=0;
             println(komacheck(komaflag, komaXflag, komaYflag, x, y));
@@ -452,12 +458,36 @@ void mousePressed()
                   //自分勝ち
                   syouriflag=1;
                 }
-
+                //ここで刺す
                 flag[x][y]=komaflag;
-                komaflag=-1;
-                teban=1-teban; 
-                phase=PHASE.Player2Start;
-                //手番変更
+                if (komacatchflag==0) {
+
+                  //駒成り
+                  if (y==1||komaYflag==1) {
+                    if (flag[x][y]==1)
+                    {
+                      flag[x][y]=7;//自分と
+                    }
+                    if (flag[x][y]==2)
+                    {
+                      phase=PHASE.Player1Narimachi;//flag[x][y]=10;//自分成銀
+                    }
+                    if (flag[x][y]==4)
+                    {
+                      flag[x][y]=8;//自分馬
+                    }
+                    if (flag[x][y]==5)
+                    {
+                      flag[x][y]=9;//自分龍
+                    }
+                  }
+                }
+                if (phase==PHASE.Player1Sasu) {
+                  komaflag=-1;
+                  teban=1-teban; 
+                  phase=PHASE.Player2Start;
+                  //手番変更
+                }
               }
 
               //draw();
@@ -473,6 +503,14 @@ void mousePressed()
         }
       }
     }
+  } else if (phase==PHASE.Player1Narimachi) {
+                                                             //成り待ちのときのクリック処理 ダイアログのxとyの範囲
+    flag[komaNariX][komaNariY]=10;//自分成銀
+
+    komaflag=-1;
+    teban=1-teban; 
+    phase=PHASE.Player2Start;
+    //手番変更
   }
 }
 

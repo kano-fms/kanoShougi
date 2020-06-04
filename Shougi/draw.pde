@@ -842,6 +842,10 @@ void draw()
       }
     }
   }
+  
+  if(phase==PHASE.Player1Narimachi){
+                                                                                      //成待ちダイアログ書く
+  }
 
   //勝敗結果
   fill(255);
@@ -875,28 +879,7 @@ void draw()
   }
   fill(0);
 
-  if (phase==PHASE.Player1Sasu) {
-    //駒成り
-    for (int n=0; n<7; n=n+1)
-    {
-      if (flag[n][1]==1)
-      {
-        flag[n][1]=7;//自分と
-      }
-      if (flag[n][1]==2)
-      {
-        flag[n][1]=10;//自分成銀
-      }
-      if (flag[n][1]==4)
-      {
-        flag[n][1]=8;//自分馬
-      }
-      if (flag[n][1]==5)
-      {
-        flag[n][1]=9;//自分龍
-      }
-    }
-  }
+  
 
   if (phase==PHASE.Player2Sasu) {
     for (int n=0; n<7; n=n+1)
