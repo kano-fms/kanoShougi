@@ -504,13 +504,20 @@ void mousePressed()
       }
     }
   } else if (phase==PHASE.Player1Narimachi) {
-                                                             //成り待ちのときのクリック処理 ダイアログのxとyの範囲
+    if(mouseX<=1300&&mouseX>=1100&&mouseY<=600&&mouseY>=500){                                                              //成り待ちのときのクリック処理 ダイアログのxとyの範囲
     flag[komaNariX][komaNariY]=10;//自分成銀
 
     komaflag=-1;
     teban=1-teban; 
     phase=PHASE.Player2Start;
     //手番変更
+    }else if(mouseX<=1500&&mouseX>1300&&mouseY<=600&&mouseY>=500){ 
+      
+    komaflag=-1;
+    teban=1-teban; 
+    phase=PHASE.Player2Start;
+    //手番変更
+    }
   }
 }
 
