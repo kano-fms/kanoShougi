@@ -11,6 +11,7 @@ int komaNariX;
 int komaNariY;
 int h1=0;
 int teban=0;//0は自分、1は相手
+int compsengo=0;//0だとコンピューター後手
 int syouriflag=0;
 int [] hishaX;
 int [] hishaY;
@@ -46,6 +47,7 @@ void setup()
 
 
   //teban=1;//先手後手の入れ替え
+  compsengo=teban;
   //phase = PHASE.Player2Start;
 
   hishaX=new int[]{1, 0, -1, 0};

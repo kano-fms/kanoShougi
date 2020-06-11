@@ -889,29 +889,6 @@ void draw()
   }
   fill(0);
 
-  
-
-  if (phase==PHASE.Player2Sasu) {
-    for (int n=0; n<7; n=n+1)
-    {
-      if (flag[n][5]==11)
-      {
-        flag[n][5]=17;//相手と
-      }
-      if (flag[n][5]==12)
-      {
-        flag[n][5]=20;//相手成銀phase==PHASE.Player1Move
-      }
-      if (flag[n][5]==14)
-      {  
-        flag[n][5]=18;//相手馬
-      }
-      if (flag[n][5]==15)
-      {
-        flag[n][5]=19;//相手龍
-      }
-    }
-  }
 
   if (phase==PHASE.Player1Start) {
     phase = PHASE.Player1Dice;
