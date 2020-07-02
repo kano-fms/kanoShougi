@@ -121,6 +121,12 @@ void keyPressed() {
       phase = PHASE.Player1Strategy;
     } else {
     }
+    println("通った");
+    if (ootekaketeru()==true) {
+      dice1=6;
+       println("通った");
+      phase = PHASE.Player1Strategy;
+    }//王手かけられてたらdice1=6
   }
 
   if (phase==PHASE.Player2Dice) {//プレイヤー２がダイスを振る
@@ -169,6 +175,9 @@ void mousePressed()
     if (mouseX>1150&&mouseX<1250&&mouseY>450&&mouseY<550)//自分サイコロを振る                          　ここから
     {
       dice1=(int)random(1, 7);
+      if (ootekaketeru()==true) {
+        dice1=6;
+      }//王手かけられてたらdice1=6
       komaflag=0;
       phase = PHASE.Player1Strategy;
     }
@@ -366,7 +375,8 @@ void mousePressed()
         if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
           if (komacatchflag==1&&motikomaflag!=0) {//持ち駒を手に取った場合         
-            if ((motikomaflag==1&&flag[x][y]==0&&x==dice1&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1)) {                                                              
+            if ((motikomaflag==1&&flag[x][y]==0&&x==dice1&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1)
+              ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6)) {                                                              
               if (y>0) {
                 flag[x][y]=motikomaflag;
                 motikomaflag=0;
@@ -506,19 +516,19 @@ void mousePressed()
       }
     }
   } else if (phase==PHASE.Player1Narimachi) {
-    if(mouseX<=1300&&mouseX>=1100&&mouseY<=600&&mouseY>=500){                                                              //成り待ちのときのクリック処理 ダイアログのxとyの範囲
-    flag[komaNariX][komaNariY]=10;//自分成銀
+    if (mouseX<=1300&&mouseX>=1100&&mouseY<=600&&mouseY>=500) {                                                              //成り待ちのときのクリック処理 ダイアログのxとyの範囲
+      flag[komaNariX][komaNariY]=10;//自分成銀
 
-    komaflag=-1;
-    teban=1-teban; 
-    phase=PHASE.Player2Start;
-    //手番変更
-    }else if(mouseX<=1500&&mouseX>1300&&mouseY<=600&&mouseY>=500){ 
-      
-    komaflag=-1;
-    teban=1-teban; 
-    phase=PHASE.Player2Start;
-    //手番変更
+      komaflag=-1;
+      teban=1-teban; 
+      phase=PHASE.Player2Start;
+      //手番変更
+    } else if (mouseX<=1500&&mouseX>1300&&mouseY<=600&&mouseY>=500) { 
+
+      komaflag=-1;
+      teban=1-teban; 
+      phase=PHASE.Player2Start;
+      //手番変更
     }
   }
 }

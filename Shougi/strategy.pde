@@ -126,6 +126,21 @@ int ootoru()
   return -1;
 }
 
+boolean ootekaketeru() {//プレイヤー2がプレイヤー1に王手をかけてる
+  if (komamovelist==null) {
+    return false;
+  }
+  for (int i=0; i<komamovelist.size(); i++ )
+  {
+    komamove move=komamovelist.get(i);
+    if (flag[move.x2][move.y2]==6)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
 int ootorarerunigeru()
 {
   for (int y=0; y<7; y++)
@@ -808,7 +823,7 @@ int FindMoveFromMovelist(int x1, int y1, int x2, int y2)
   return -1;
 }
 
-boolean ootekakatteru() {
+boolean ootekakatteru() {//プレイヤー1がプレイヤー2に王手をかけてる
   for (int y=0; y<7; y++)
   {
     for (int x=0; x<7; x++)

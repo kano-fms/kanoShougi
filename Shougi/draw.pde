@@ -842,19 +842,19 @@ void draw()
       }
     }
   }
-  
-  if(phase==PHASE.Player1Narimachi){
-     fill(255);                                                                     //成待ちダイアログ書く
-     rect(1100, 400, 400, 200);
-     fill(0);
-     line(1100, 500, 1500, 500);
-     line(1300, 500, 1300, 600);
-     textSize(30);
-     text("成りますか？", 1210, 460);
-     fill(255, 0, 0);
-     text("はい", 1167, 560);
-     fill(0);
-     text("いいえ", 1350, 560);
+
+  if (phase==PHASE.Player1Narimachi) {
+    fill(255);                                                                     //成待ちダイアログ書く
+    rect(1100, 400, 400, 200);
+    fill(0);
+    line(1100, 500, 1500, 500);
+    line(1300, 500, 1300, 600);
+    textSize(30);
+    text("成りますか？", 1210, 460);
+    fill(255, 0, 0);
+    text("はい", 1167, 560);
+    fill(0);
+    text("いいえ", 1350, 560);
   }
 
   //勝敗結果
@@ -893,19 +893,20 @@ void draw()
   if (phase==PHASE.Player1Start) {
     phase = PHASE.Player1Dice;
   }
-  
+
   if (phase==PHASE.Player1Strategy) {
     phase = PHASE.Player1Tenitoru;
   }
-  
-   if (phase==PHASE.Player2Start) {
+
+  if (phase==PHASE.Player2Start) {
     phase = PHASE.Player2Dice;
   }
-  
+
   if (phase==PHASE.Player2Strategy) {
     byou=millis();
     makeKOMAmovelist();
     enemystrategy();
+    makeKOMAmovelist();//王手かかってるか判定
     komaflag=-1;
     teban=0;
     phase = PHASE.Player1Start;
