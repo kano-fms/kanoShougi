@@ -22,6 +22,9 @@ int dice2=1;
 boolean dice1musidekiru;
 boolean dice2musidekiru;
 boolean autodice=false;
+int ownoute=0;
+int ownkiki[][] =new int [7][7];
+int player2kiki[][] =new int [7][7];
 
 enum PHASE {
   Player1Start, 
@@ -121,10 +124,8 @@ void keyPressed() {
       phase = PHASE.Player1Strategy;
     } else {
     }
-    println("通った");
     if (ootekaketeru()==true) {
       dice1=6;
-       println("通った");
       phase = PHASE.Player1Strategy;
     }//王手かけられてたらdice1=6
   }
@@ -178,6 +179,7 @@ void mousePressed()
       if (ootekaketeru()==true) {
         dice1=6;
       }//王手かけられてたらdice1=6
+
       komaflag=0;
       phase = PHASE.Player1Strategy;
     }
