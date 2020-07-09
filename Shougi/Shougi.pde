@@ -23,7 +23,7 @@ boolean dice1musidekiru;
 boolean dice2musidekiru;
 boolean autodice=false;
 int ownoute=0;
-int ownkiki[][] =new int [7][7];
+int player1kiki[][] =new int [7][7];
 int player2kiki[][] =new int [7][7];
 
 enum PHASE {
