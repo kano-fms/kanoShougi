@@ -377,10 +377,11 @@ void mousePressed()
         if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
           if (komacatchflag==1&&motikomaflag!=0) {//持ち駒を手に取った場合         
-            if ((motikomaflag==1&&flag[x][y]==0&&x==dice1&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1)
+            if ((motikomaflag==1&&flag[x][y]==0&&(6-x)==dice1&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&(6-x)==dice1)
               ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6)) {                                                              
               if (y>0) {
                 flag[x][y]=motikomaflag;
+                println("人は"+hitokihuoutput(0, 0, x, y, motikomaflag));
                 motikomaflag=0;
                 komaflag=-1;
                 komacatchflag=0;
@@ -497,6 +498,7 @@ void mousePressed()
                   }
                 }
                 if (phase==PHASE.Player1Sasu) {
+                  println("人は"+hitokihuoutput(komaXflag, komaYflag, x, y, komaflag));
                   komaflag=-1;
                   teban=1-teban; 
                   phase=PHASE.Player2Start;
@@ -606,8 +608,8 @@ boolean komacheck(int k, int x1, int y1, int x2, int y2 ) {
   if (syouriflag==2)return false;//勝敗結果後
   if (flag[x2][y2]==-1)return false;
 
-  if (teban==0&&x2!=dice1&&dice1!=6)return false;                       //&&dice1musidekiru==false追加予定
-  if (teban==1&&x2!=dice2&&dice2!=6&&dice2musidekiru==false)return false;
+  if (teban==0&&(6-x2)!=dice1&&dice1!=6)return false;                       //&&dice1musidekiru==false追加予定
+  if (teban==1&&(6-x2)!=dice2&&dice2!=6&&dice2musidekiru==false)return false;
 
   if (teban==0&&k>10)
   {
