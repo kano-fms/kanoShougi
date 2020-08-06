@@ -28,8 +28,10 @@ boolean enemystrategy() //<>// //<>// //<>// //<>// //<>//
   //if(number!=-2){
   komamove move=komamovelist.get(number);
   println("相手は,", move.k, move.x1, move.y1, move.x2, move.y2);
-  
+
   println("コンピューターは"+computerkihuoutput(move));
+  kihu.add(computerkihuoutput(move));
+
   if (move.x1>=1&&move.x1<=5) {//指す手
     flag[move.x1][move.y1]=0;
     komaflag=move.k;                    //駒を手に取る

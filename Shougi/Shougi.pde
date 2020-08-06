@@ -25,6 +25,8 @@ boolean autodice=false;
 int ownoute=0;
 int player1kiki[][] =new int [7][7];
 int player2kiki[][] =new int [7][7];
+ArrayList<String> kihu;
+PrintWriter file;
 
 enum PHASE {
   Player1Start, 
@@ -49,9 +51,11 @@ void setup()
   size(1700, 1000);
 
 
-  //teban=1;//先手後手の入れ替え
+  teban=1;//先手後手の入れ替え
   compsengo=teban;
-  //phase = PHASE.Player2Start;
+  phase = PHASE.Player2Start;
+
+  kihu= new ArrayList<String>();
 
   hishaX=new int[]{1, 0, -1, 0};
   hishaY=new int[]{0, 1, 0, -1};
@@ -97,6 +101,17 @@ void setup()
 }
 
 void keyPressed() {
+  if (key=='t'||key=='T') {//棋譜保存
+    file=createWriter("kihu.dsk");
+
+    for (int i=0; i<kihu.size(); i++) {
+      file.println(kihu.get(i));
+    }
+
+    file.flush();
+    file.close();
+  }
+
   if (phase==PHASE.Player1Dice) {//プレイヤー1がダイスを振る
     if (key=='1') {
       dice1=1;
@@ -377,11 +392,15 @@ void mousePressed()
         if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
           if (komacatchflag==1&&motikomaflag!=0) {//持ち駒を手に取った場合         
-            if ((motikomaflag==1&&flag[x][y]==0&&(6-x)==dice1&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&(6-x)==dice1)
-              ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&y>0)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6)) {                                                              
+            if ((motikomaflag==1&&flag[x][y]==0&&(6-x)==dice1&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&(6-x)==dice1&&compsengo==0)
+              ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==0)
+              ||(motikomaflag==1&&flag[x][y]==0&&x==dice1&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1&&compsengo==1)
+              ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==1)) {                                                              
               if (y>0) {
                 flag[x][y]=motikomaflag;
                 println("人は"+hitokihuoutput(0, 0, x, y, motikomaflag));
+                kihu.add(hitokihuoutput(0, 0, x, y, motikomaflag));
+
                 motikomaflag=0;
                 komaflag=-1;
                 komacatchflag=0;
@@ -499,6 +518,8 @@ void mousePressed()
                 }
                 if (phase==PHASE.Player1Sasu) {
                   println("人は"+hitokihuoutput(komaXflag, komaYflag, x, y, komaflag));
+                  kihu.add(hitokihuoutput(komaXflag, komaYflag, x, y, komaflag));
+
                   komaflag=-1;
                   teban=1-teban; 
                   phase=PHASE.Player2Start;
