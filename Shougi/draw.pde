@@ -931,6 +931,10 @@ void draw()
   if (phase==PHASE.Player2Strategy) {
     byou=millis();
     makeKOMAmovelist();
+    if (komamovelist.size()==0) {
+      dice2=6;
+      makeKOMAmovelist();
+    }
     enemystrategy();
     makeKOMAmovelist();//王手かかってるか判定
     komaflag=-1;
