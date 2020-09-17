@@ -1,23 +1,23 @@
 String computerkihuoutput(komamove move) {
   if (compsengo==0) {
-    if(move.x1==0){
+    if (move.x1==0) {
       return "-"+"0"+""+"0"+""+(6-move.x2)+""+move.y2+" "+komaname(move.k)+":"+dice2;
     }
     return "-"+(6-move.x1)+""+move.y1+""+(6-move.x2)+""+move.y2+" "+komaname(move.k)+":"+dice2;
   } else {
-    
+
     return "+"+move.x1+""+(6-move.y1)+""+move.x2+""+(6-move.y2)+" "+komaname(move.k)+":"+dice2;
   }
 }
 
 String hitokihuoutput(int x1, int y1, int x2, int y2, int k) {
   if (compsengo==0) {
-    if(x1==0){
+    if (x1==0) {
       return "+"+"0"+""+"0"+""+(6-x2)+""+y2+" "+komaname(k)+":"+dice1;
     }
     return "+"+(6-x1)+""+y1+""+(6-x2)+""+y2+" "+komaname(k)+":"+dice1;
   } else {
-    
+
     return "-"+x1+""+(6-y1)+""+x2+""+(6-y2)+" "+komaname(k)+":"+dice1;
   }
 }
@@ -46,4 +46,15 @@ String komaname(int k) {
   }
 
   return "";
+}
+
+void kihuHozon() {
+  file=createWriter("kihu.dsk");
+
+  for (int i=0; i<kihu.size(); i++) {
+    file.println(kihu.get(i));
+  }
+
+  file.flush();
+  file.close();
 }

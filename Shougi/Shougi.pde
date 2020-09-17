@@ -1,33 +1,33 @@
-int [][] koma=new int [7][7];
-int [][] flag=new int [7][7];
-int [][] motigoma1=new int[2][6];
-int [][] motigoma2=new int[2][6];
-int komaflag=-1;
-int motikomaflag=0;
-int komacatchflag=0;
-int komaXflag=0;
-int komaYflag=0;
-int komaNariX;
-int komaNariY;
-int h1=0;
-int teban=0;//0は自分、1は相手
-int compsengo=0;//0だとコンピューター後手
-int syouriflag=0;
-int [] hishaX;
+int [][] koma=new int [7][7];//盤面、コマの利きを調べる。
+int [][] flag=new int [7][7];//盤面
+int [][] motigoma1=new int[2][6];//プレーヤー１の持ち駒
+int [][] motigoma2=new int[2][6];//プレーヤー２の持ち駒
+int komaflag=-1;//指すために手にしたコマ
+int motikomaflag=0;//駒台から手にしたコマ
+int komacatchflag=0;//駒大の駒を打とうとしているかどうかのフラグ
+int komaXflag=0;//コマを指すX座標
+int komaYflag=0;//コマを指すY座標
+int komaNariX;//
+int komaNariY;//
+int h1=0;//何だろう？
+int teban=0;//0：手前側（人間）、1：向こう側（コンピュータ）
+int compsengo=0;//0：コンピューターが後手、1：人が後手
+int syouriflag=0;//勝負がついたかどうかのフラグ
+int [] hishaX;//飛車の利きを調べるための配列
 int [] hishaY;
-int [] kakuX;
+int [] kakuX;//角の利きを調べるための配列
 int [] kakuY;
-int dice1=1;
-int dice2=1;
-boolean dice1musidekiru;
-boolean dice2musidekiru;
-boolean autodice=false;
-int ownoute=0;
-int player1kiki[][] =new int [7][7];
-int player2kiki[][] =new int [7][7];
-ArrayList<String> kihu;
-PrintWriter file;
-agentHabu Habu;
+int dice1=1;//プレーヤー１用のさいころ
+int dice2=1;//プレーヤー２用のさいころ
+boolean dice1musidekiru;//プレーヤー１がさいころの目を無視できる状況かどうか
+boolean dice2musidekiru;//プレーヤー２がさいころの目を無視できる状況かどうか
+boolean autodice=true;//自動でさいころを振るかどうか
+int ownoute=0;//プレーヤー２が王手をかけているかどうか（？）
+int player1kiki[][] =new int [7][7];//盤面、コマの利きを調べる。プレーヤー１用
+int player2kiki[][] =new int [7][7];//盤面、コマの利きを調べる。プレーヤー２用
+ArrayList<String> kihu;//棋譜を取るための配列
+PrintWriter file;//棋譜を保存するためのファイル
+agentHabu Habu;// エージェント第1号「はぶさん」
 
 enum PHASE {
   Player1Start, 
@@ -50,13 +50,18 @@ PHASE phase = PHASE.Player1Start;
 void setup()
 {
   size(1700, 1000);
-
+  //はぶさん
   Habu=new agentHabu();
 
-  teban=0;//先手後手の入れ替え
+  teban=0;//先手後手の入れ替え、０：プレーヤー１、１：プレーヤー２
   compsengo=teban;
-  //phase = PHASE.Player2Start;
-
+  if(compsengo==0){
+    phase = PHASE.Player1Start;
+  }
+  else {
+    phase = PHASE.Player2Start;
+  }
+  // 棋譜初期化
   kihu= new ArrayList<String>();
 
   hishaX=new int[]{1, 0, -1, 0};
@@ -64,119 +69,21 @@ void setup()
   kakuX=new int[]{1, 1, -1, -1};
   kakuY=new int[]{1, -1, 1, -1};
 
-  //駒リセット
-  for (int x=0; x<7; x=x+1)
-  {
-    for (int y=0; y<7; y=y+1)
-    {
-      koma[x][y]=0;
-      flag[x][y]=0;
-      if (x==0||x==6||y==0||y==6)
-      {
-        flag[x][y]=-1;
-      }
-    }
-  }
-
-  for (int x=0; x<2; x=x+1)
-  {
-    for (int y=0; y<5; y=y+1)
-    {
-      motigoma1[x][y]=0;
-      motigoma2[x][y]=0;
-    }
-  }
-
-  flag[1][4]=1;
-  flag[2][5]=3;
-  flag[3][5]=2;
-  flag[4][5]=4;
-  flag[5][5]=5;
-  flag[1][5]=6;
-
-  flag[5][2]=11;
-  flag[4][1]=13;
-  flag[3][1]=12;
-  flag[2][1]=14;
-  flag[1][1]=15;
-  flag[5][1]=16;
+  komaReset();//コマを初期配列にする
 }
 
 void keyPressed() {
   if (key=='t'||key=='T') {//棋譜保存
-    file=createWriter("kihu.dsk");
-
-    for (int i=0; i<kihu.size(); i++) {
-      file.println(kihu.get(i));
-    }
-
-    file.flush();
-    file.close();
+    kihuHozon();
   }
 
-  if (phase==PHASE.Player1Dice) {//プレイヤー1がダイスを振る
-    if (key=='1') {
-      dice1=1;
-      komaflag=0;
-      phase = PHASE.Player1Strategy;
-    } else if (key=='2') {
-      dice1=2;
-      komaflag=0;
-      phase = PHASE.Player1Strategy;
-    } else if (key=='3') {
-      dice1=3;
-      komaflag=0;
-      phase = PHASE.Player1Strategy;
-    } else if (key=='4') {
-      dice1=4;
-      komaflag=0;
-      phase = PHASE.Player1Strategy;
-    } else if (key=='5') {
-      dice1=5;
-      komaflag=0;
-      phase = PHASE.Player1Strategy;
-    } else if (key=='6') {
-      dice1=6;
-      komaflag=0;
-      phase = PHASE.Player1Strategy;
-    } else {
-    }
-    if (ootekaketeru()==true) {
-      dice1=6;
-      phase = PHASE.Player1Strategy;
-    }//王手かけられてたらdice1=6
-
-    makeKOMAmovelist();
-    if (komamovelist.size()==0) {
-      dice1=6;
-    }
+  if (phase==PHASE.Player1Dice) {//プレイヤー1がダイスを振る、
+  //ダイスのオートモードと関係なくここは使える？
+    shakeDice1();
   }
 
   if (phase==PHASE.Player2Dice) {//プレイヤー２がダイスを振る
-    dice2musidekiru=false;
-    if (key=='1') {
-      dice2=1;
-      phase = PHASE.Player2Strategy;
-    } else if (key=='2') {
-      dice2=2;
-      phase = PHASE.Player2Strategy;
-    } else if (key=='3') {
-      dice2=3;
-      phase = PHASE.Player2Strategy;
-    } else if (key=='4') {
-      dice2=4;
-      phase = PHASE.Player2Strategy;
-    } else if (key=='5') {
-      dice2=5;
-      phase = PHASE.Player2Strategy;
-    } else if (key=='6') {
-      dice2=6;
-      phase = PHASE.Player2Strategy;
-    } else {
-    }
-    if (ootekakatteru()) {
-      dice2musidekiru=true;
-    }
+    shakeDice2();
   }
 }
 
