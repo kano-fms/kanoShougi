@@ -49,6 +49,191 @@ void komaReset() {
   flag[5][1]=16;
 }
 
+void clickMyKoma() {
+  makeKOMAmovelist();//動かせるコマのリストをこのタイミングで作っておく。
+  for (int x=0; x<7; x=x+1) {
+    for (int y=0; y<7; y=y+1) {
+      if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260) {
+        if (flag[x][y]<11&&flag[x][y]>0) {//自分の駒をクリックした場合
+          komaflag=flag[x][y];//クリックした駒を指す駒を指定する
+          komaXflag=x;
+          komaYflag=y;
+          phase=PHASE.Player1Sasu;
+        }
+      }
+    }
+  }
+}
+
+void clickMyKomadai() {
+  //指し手が完了するまで、motigoma1はいじらないほうがいいのでは？（→対応した）
+  if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730&&komacatchflag==0)//歩を使う
+  {
+    if (motigoma1[0][0]==1) {
+      motikomaflag=1;
+      komaXflag=0;
+      komaYflag=0;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1030&&mouseX<1130&&mouseY>790&&mouseY<890&&komacatchflag==0)//歩を使う
+  {
+    if (motigoma1[1][0]==1) {
+      motikomaflag=1;
+      komaXflag=1;
+      komaYflag=0;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1130&&mouseX<1230&&mouseY>630&&mouseY<730&&komacatchflag==0)//銀を使う
+  {
+    if (motigoma1[0][1]==1) {
+      motikomaflag=2;
+      komaXflag=0;
+      komaYflag=1;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1130&&mouseX<1230&&mouseY>790&&mouseY<890&&komacatchflag==0)//銀を使う
+  {
+    if (motigoma1[1][1]==1) {
+      motikomaflag=2;
+      komaXflag=1;
+      komaYflag=1;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1230&&mouseX<1330&&mouseY>630&&mouseY<730&&komacatchflag==0)//金を使う
+  {
+    if (motigoma1[0][2]==1) {
+      motikomaflag=3;
+      komaXflag=0;
+      komaYflag=2;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1230&&mouseX<1330&&mouseY>790&&mouseY<890&&komacatchflag==0)//金を使う
+  {
+    if (motigoma1[1][2]==1) {
+      motikomaflag=3;
+      komaXflag=1;
+      komaYflag=2;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1330&&mouseX<1430&&mouseY>630&&mouseY<730&&komacatchflag==0)//角を使う
+  {
+    if (motigoma1[0][3]==1) {
+      motikomaflag=4;
+      komaXflag=0;
+      komaYflag=3;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1330&&mouseX<1430&&mouseY>790&&mouseY<890&&komacatchflag==0)//角を使う
+  {
+    if (motigoma1[1][3]==1) {
+      motikomaflag=4;
+      komaXflag=1;
+      komaYflag=3;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1430&&mouseX<1530&&mouseY>630&&mouseY<730&&komacatchflag==0)//飛を使う
+  {
+    if (motigoma1[0][4]==1) {
+      motikomaflag=5;
+      komaXflag=0;
+      komaYflag=4;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+  if (mouseX>1430&&mouseX<1530&&mouseY>790&&mouseY<890&&komacatchflag==0)//飛を使う                          　ここまで
+  {
+    if (motigoma1[1][4]==1) {
+      motikomaflag=5;
+      komaXflag=1;
+      komaYflag=4;
+      komacatchflag=1;
+      phase=PHASE.Player1Sasu;
+    }
+  }
+}
+
+void clickHisKomadai() {//多分不要
+  if (komaflag>=0) {//駒台から駒をつまむ
+    if (mouseX>1030&&mouseX<1130&&mouseY>270&&mouseY<370)//歩を使われる
+    {
+      motikomaflag=11;
+      motigoma2[0][0]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1030&&mouseX<1130&&mouseY>110&&mouseY<210)//歩を使われる
+    {
+      motikomaflag=11;
+      motigoma2[1][0]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1130&&mouseX<1230&&mouseY>270&&mouseY<370)//銀を使われる
+    {
+      motikomaflag=12;
+      motigoma2[0][1]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1130&&mouseX<1230&&mouseY>110&&mouseY<210)//銀を使われる
+    {
+      motikomaflag=12;
+      motigoma2[1][1]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1230&&mouseX<1330&&mouseY>270&&mouseY<370)//金を使われる
+    {
+      motikomaflag=13;
+      motigoma2[0][2]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1230&&mouseX<1330&&mouseY>110&&mouseY<210)//金を使われる
+    {
+      motikomaflag=13;
+      motigoma2[1][2]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1330&&mouseX<1430&&mouseY>270&&mouseY<370)//角を使われる
+    {
+      motikomaflag=14;
+      motigoma2[0][3]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1330&&mouseX<1430&&mouseY>110&&mouseY<210)//角を使われる
+    {
+      motikomaflag=14;
+      motigoma2[1][3]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1430&&mouseX<1530&&mouseY>270&&mouseY<370)//飛を使われる
+    {
+      motikomaflag=15;
+      motigoma2[0][4]=0;
+      komacatchflag=1;
+    }
+    if (mouseX>1430&&mouseX<1530&&mouseY>110&&mouseY<210)//飛を使われる
+    {
+      motikomaflag=15;
+      motigoma2[1][4]=0;
+      komacatchflag=1;
+    }
+  }
+}
+
 ArrayList<komamove> komamovelist;
 boolean makeKOMAmovelist()
 {
@@ -207,4 +392,147 @@ boolean makeKOMAmovelist()
     println(move.k, move.x1, move.y1, move.x2, move.y2, dice2);
   }
   return false;
+}
+
+void clickMyKomaUtu() {
+  for (int x=0; x<7; x++) {// 1~5でよいのでは？
+    for (int y=0; y<7; y++) {// 1~5でよいのでは？
+      if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260) {
+        //合法手かどうかを判定する。
+        makeKOMAmovelist();//動かせるコマのリストをこのタイミングで作っておく。
+        boolean gohoshu=false;
+        for (int n=0; n<komamovelist.size(); n++) {
+          komamove move=komamovelist.get(n);
+          if (move.x1==0&&move.y1==0&&move.x2==x&&move.y2==y&&move.k==motikomaflag) {
+            gohoshu=true;
+          }
+        }
+        if (((motikomaflag==1&&flag[x][y]==0&&(6-x)==dice1&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&(6-x)==dice1&&compsengo==0)
+          ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==0)
+          ||(motikomaflag==1&&flag[x][y]==0&&x==dice1&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1&&compsengo==1)
+
+          ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==1))&&gohoshu) {                                                              
+          if (y>0) {//謎のフラグ条件（？？？）
+            //このタイミングでコマ台を空にするという考え方もある。（→対応しました）
+            motigoma1[komaXflag][komaYflag]=0
+            //ここで打つ
+            flag[x][y]=motikomaflag;
+            println("人は"+hitokihuoutput(0, 0, x, y, motikomaflag));
+            kihu.add(hitokihuoutput(0, 0, x, y, motikomaflag));
+
+            motikomaflag=0;
+            komaflag=-1;
+            komacatchflag=0;
+            komaXflag=-1;
+            komaYflag=-1;
+            teban=1-teban;
+            phase=PHASE.Player2Start;
+          }
+        } else {
+          komaflag=0;
+          //gohoshuでなかったら駒台に駒を戻す
+          komacatchflag=0;
+          motikomaflag=0;
+          komaXflag=-1;
+          komaYflag=-1;
+          phase=PHASE.Player1Tenitoru;
+          return;
+        }
+      }
+    }
+  }
+}
+
+void clickMyKomaSasu() {
+  if (komaflag>0) {//盤上の駒をさす場合
+    for (int x=0; x<7; x++) {
+      for (int y=0; y<7; y++) {
+        if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260) {
+          komaNariX=x;//これは何？
+          komaNariY=y;
+          //動かせるかチェック
+          flag[komaXflag][komaYflag]=0;
+          println("人は"+komaflag, komaXflag, komaYflag, x, y);
+          println("komacheck=", komacheck(komaflag, komaXflag, komaYflag, x, y));
+          println("teban=", teban);
+          if (komacheck(komaflag, komaXflag, komaYflag, x, y)==false)
+          {
+            flag[komaXflag][komaYflag]=komaflag;
+            komaflag=0;//クリックやり直し待ち
+            komaXflag=-1;
+            komaYflag=-1;
+            phase=PHASE.Player1Tenitoru;
+            return
+          }
+          //駒とる
+          if (teban==1) {//これはない
+            enemykomamove(x, y);//これはない
+          } else if (teban==0)//ここ?
+          {
+            mykomamove(x, y);
+          }
+        }
+      }
+    }
+  }
+}
+
+void mykomamove(x, y) {
+  if (flag[x][y]==11||flag[x][y]==17)//歩とる
+  {
+    if (motigoma1[0][0]==0)
+    {
+      motigoma1[0][0]=1;
+    } else if (motigoma1[0][0]==1)
+    {
+      motigoma1[1][0]=1;
+    }
+  }
+  if (flag[x][y]==12||flag[x][y]==20)//銀とる
+  {
+    if (motigoma1[0][1]==0)
+    {
+      motigoma1[0][1]=1;
+    } else if (motigoma1[0][1]==1)
+    {
+      motigoma1[1][1]=1;
+    }
+  }
+  if (flag[x][y]==13)//金とる
+  {
+    if (motigoma1[0][2]==0)
+    {
+      motigoma1[0][2]=1;
+    } else if (motigoma1[0][2]==1)
+    {
+      motigoma1[1][2]=1;
+    }
+  }
+  if (flag[x][y]==14||flag[x][y]==18)//角とる
+  {
+    if (motigoma1[0][3]==0)
+    {
+      motigoma1[0][3]=1;
+    } else if (motigoma1[0][3]==1)
+    {
+      motigoma1[1][3]=1;
+    }
+  }
+  if (flag[x][y]==15||flag[x][y]==19)//飛とる
+  {
+    if (motigoma1[0][4]==0)
+    {
+      motigoma1[0][4]=1;
+    } else if (motigoma1[0][4]==1)
+    {
+      motigoma1[1][4]=1;
+    }
+  }
+  if (flag[x][y]==16)//玉とる
+  {
+    //自分勝ち
+    syouriflag=1;
+  }
+  //ここで指す
+  flag[x][y]=komaflag;
 }

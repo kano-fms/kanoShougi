@@ -27,12 +27,14 @@ void shakeDice1() {
   }
   if (ootekaketeru()==true) {//P2がP1に王手をかけていたらdice1=6
     dice1=6;
+    komaflag=0;
     phase = PHASE.Player1Strategy;
   }
 
   makeKOMAmovelist();
   if (komamovelist.size()==0) {//動かせるところがなかったらdice1=6
     dice1=6;
+    komaflag=0;
     phase = PHASE.Player1Strategy;
   }
 }
@@ -67,6 +69,42 @@ void shakeDice2() {
   makeKOMAmovelist();
   if (komamovelist.size()==0) {//動かせるところがなかったらdice2=6
     dice2=6;
+    phase = PHASE.Player2Strategy;
+  }
+}
+
+void shakeDice1Auto() {
+  if (mouseX>1150&&mouseX<1250&&mouseY>450&&mouseY<550)//自分のサイコロを振る                          　
+  {
+    dice1=(int)random(1, 7);
+    if (ootekaketeru()==true) {
+      dice1=6;
+    }//王手かけられてたらdice1=6
+
+    makeKOMAmovelist();
+    if (komamovelist.size()==0) {
+      dice1=6;
+    }
+
+    komaflag=0;
+    phase = PHASE.Player1Strategy;
+  }
+}
+
+void shakeDice2Auto() {
+  if (mouseX>1350&&mouseX<1450&&mouseY>450&&mouseY<550)//相手サイコロを振る
+  {
+    dice2musidekiru=false;
+    dice2=(int)random(1, 7);
+    if (ootekakatteru()) {
+      //      dice2musidekiru=true;
+      dice2=6;
+    }
+
+    makeKOMAmovelist();
+    if (komamovelist.size()==0) {//動かせるところがなかったらdice2=6
+      dice2=6;
+    }
     phase = PHASE.Player2Strategy;
   }
 }
