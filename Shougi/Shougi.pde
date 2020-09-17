@@ -27,6 +27,7 @@ int player1kiki[][] =new int [7][7];
 int player2kiki[][] =new int [7][7];
 ArrayList<String> kihu;
 PrintWriter file;
+agentHabu Habu;
 
 enum PHASE {
   Player1Start, 
@@ -50,6 +51,7 @@ void setup()
 {
   size(1700, 1000);
 
+  Habu=new agentHabu();
 
   teban=0;//先手後手の入れ替え
   compsengo=teban;
@@ -143,11 +145,11 @@ void keyPressed() {
       dice1=6;
       phase = PHASE.Player1Strategy;
     }//王手かけられてたらdice1=6
-    
+
     makeKOMAmovelist();
-      if(komamovelist.size()==0){
-        dice1=6;
-      }
+    if (komamovelist.size()==0) {
+      dice1=6;
+    }
   }
 
   if (phase==PHASE.Player2Dice) {//プレイヤー２がダイスを振る
@@ -199,9 +201,9 @@ void mousePressed()
       if (ootekaketeru()==true) {
         dice1=6;
       }//王手かけられてたらdice1=6
-      
+
       makeKOMAmovelist();
-      if(komamovelist.size()==0){
+      if (komamovelist.size()==0) {
         dice1=6;
       }
 
@@ -401,12 +403,23 @@ void mousePressed()
       {
         if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
-          if (komacatchflag==1&&motikomaflag!=0) {//持ち駒を手に取った場合         
-            if ((motikomaflag==1&&flag[x][y]==0&&(6-x)==dice1&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&(6-x)==dice1&&compsengo==0)
+          if (komacatchflag==1&&motikomaflag!=0) {//持ち駒を手に取った場合   
+            makeKOMAmovelist();
+            boolean gohoshu=false;
+            for (int n=0; n<komamovelist.size(); n++) {
+              komamove move=komamovelist.get(n);
+              if (move.x1==0&&move.y1==0&&move.x2==x&&move.y2==y&&move.k==motikomaflag) {
+                gohoshu=true;
+              }
+            }
+
+            if (((motikomaflag==1&&flag[x][y]==0&&(6-x)==dice1&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&(6-x)==dice1&&compsengo==0)
               ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==0)
               ||(motikomaflag==1&&flag[x][y]==0&&x==dice1&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1&&compsengo==1)
-              ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==1)) {                                                              
+              
+              ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==1))&&gohoshu) {                                                              
               if (y>0) {
+
                 flag[x][y]=motikomaflag;
                 println("人は"+hitokihuoutput(0, 0, x, y, motikomaflag));
                 kihu.add(hitokihuoutput(0, 0, x, y, motikomaflag));
@@ -419,6 +432,7 @@ void mousePressed()
               }
             } else {
               komaflag=0;
+              //gohoshuでなかったら駒台に駒を戻す
               phase=PHASE.Player1Tenitoru;
             }
           } else if (komaflag>0)//盤上の駒をさす場合

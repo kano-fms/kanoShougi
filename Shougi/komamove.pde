@@ -34,14 +34,18 @@ boolean makeKOMAmovelist()
       for (int x=1; x<=5; x++) {
         for (int y=1; y<=4; y++) {//歩は最上段に打てない
           if (flag[x][y]==0&&((6-x)==dice2||dice2==6||dice2musidekiru)&&compsengo==0) {
-            komamovelist.add(new komamove(11, 0, 0, x, y));
+            if (flag[x][1]!=11&&flag[x][2]!=11&&flag[x][3]!=11&&flag[x][4]!=11&&flag[x][5]!=11) {//二歩対策
+              komamovelist.add(new komamove(11, 0, 0, x, y));
+            }
           }
         }
       }
       for (int x=1; x<=5; x++) {
         for (int y=2; y<=5; y++) {
           if (flag[x][y]==0&&(x==dice2||dice2==6||dice2musidekiru)&&compsengo==1) {
-            komamovelist.add(new komamove(11, 0, 0, x, y));
+            if (flag[x][1]!=11&&flag[x][2]!=11&&flag[x][3]!=11&&flag[x][4]!=11&&flag[x][5]!=11) {//二歩対策
+              komamovelist.add(new komamove(11, 0, 0, x, y));
+            }
           }
         }
       }
@@ -90,21 +94,23 @@ boolean makeKOMAmovelist()
         }
       }
     }
-  }
-  
-  else if (tb==0) {
+  } else if (tb==0) {
     if (motigoma1[0][0]==1||motigoma1[1][0]==1) {//持ち駒歩1
       for (int x=1; x<=5; x++) {
         for (int y=2; y<=5; y++) {//歩は最上段に打てない
           if (flag[x][y]==0&&((6-x)==dice1||dice1==6||dice1musidekiru)&&compsengo==0) {
-            komamovelist.add(new komamove(1, 0, 0, x, y));
+            if (flag[x][1]!=1&&flag[x][2]!=1&&flag[x][3]!=1&&flag[x][4]!=1&&flag[x][5]!=1) {//二歩対策
+              komamovelist.add(new komamove(1, 0, 0, x, y));
+            }
           }
         }
       }
       for (int x=1; x<=5; x++) {
         for (int y=1; y<=4; y++) {
           if (flag[x][y]==0&&(x==dice1||dice1==6||dice1musidekiru)&&compsengo==1) {
-            komamovelist.add(new komamove(1, 0, 0, x, y));
+            if (flag[x][1]!=1&&flag[x][2]!=1&&flag[x][3]!=1&&flag[x][4]!=1&&flag[x][5]!=1) {//二歩対策
+              komamovelist.add(new komamove(1, 0, 0, x, y));
+            }
           }
         }
       }
@@ -154,7 +160,7 @@ boolean makeKOMAmovelist()
       }
     }
   }
-  
+
   for (int i=0; i<komamovelist.size(); i++ )
   {
     komamove move=komamovelist.get(i);
