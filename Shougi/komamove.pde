@@ -268,7 +268,7 @@ boolean makeKOMAmovelist()
         }
       }
       for (int x=1; x<=5; x++) {
-        for (int y=1; y<=4; y++) {
+        for (int y=1; y<=4; y++) {//1から4
           if (flag[x][y]==0&&(x==dice2||dice2==6||dice2musidekiru)&&compsengo==1) {
             if (flag[x][1]!=11&&flag[x][2]!=11&&flag[x][3]!=11&&flag[x][4]!=11&&flag[x][5]!=11) {//二歩対策
               komamovelist.add(new komamove(11, 0, 0, x, y));
@@ -333,7 +333,7 @@ boolean makeKOMAmovelist()
         }
       }
       for (int x=1; x<=5; x++) {
-        for (int y=2; y<=5; y++) {
+        for (int y=2; y<=5; y++) {// 2から5
           if (flag[x][y]==0&&(x==dice1||dice1==6||dice1musidekiru)&&compsengo==1) {
             if (flag[x][1]!=1&&flag[x][2]!=1&&flag[x][3]!=1&&flag[x][4]!=1&&flag[x][5]!=1) {//二歩対策
               komamovelist.add(new komamove(1, 0, 0, x, y));
@@ -564,4 +564,70 @@ void komaToru(int x, int y) {
     //自分勝ち
     syouriflag=1;
   }
+}
+
+void enemykomamove(int x, int y)
+{
+
+  if (flag[x][y]==1||flag[x][y]==7)//歩とられる
+  {
+    if (motigoma2[0][0]==0)
+    {
+      motigoma2[0][0]=1;
+    } else if (motigoma2[0][0]==1)
+    {
+      motigoma2[1][0]=1;
+    }
+  }
+  if (flag[x][y]==2||flag[x][y]==10)//銀とられる
+  {
+    if (motigoma2[0][1]==0)
+    {
+      motigoma2[0][1]=1;
+    } else if (motigoma2[0][1]==1)
+    {
+      motigoma2[1][1]=1;
+    }
+  }
+  if (flag[x][y]==3)//金とられる
+  {
+    if (motigoma2[0][2]==0)
+    {
+      motigoma2[0][2]=1;
+    } else if (motigoma2[0][2]==1)
+    {
+      motigoma2[1][2]=1;
+    }
+  }
+  if (flag[x][y]==4||flag[x][y]==8)//角とられる
+  {
+    if (motigoma2[0][3]==0)
+    {
+      motigoma2[0][3]=1;
+    } else if (motigoma2[0][3]==1)
+    {
+      motigoma2[1][3]=1;
+    }
+  }
+  if (flag[x][y]==5||flag[x][y]==9)//飛とられる
+  {
+    if (motigoma2[0][4]==0)
+    {
+      motigoma2[0][4]=1;
+    } else if (motigoma2[0][4]==1)
+    {
+      motigoma2[1][4]=1;
+    }
+  }
+  if (flag[x][y]==6)//王とられる
+  {
+    //相手勝ち
+    syouriflag=2;
+  }
+
+  flag[x][y]=komaflag;
+  komaflag=0;
+  teban=1-teban;      
+  //dice2=(int)random(1, 7);
+  //手番変更
 }
