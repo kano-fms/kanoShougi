@@ -96,71 +96,16 @@ void mousePressed()
       clickMyKoma();
     }
     clickMyKomadai();//駒台から駒をつまむ
-  } else if (phase==PHASE.Player2Tenitoru){
+  } else if (phase==PHASE.Player2Tenitoru) {
     //多分不要
     //clickHisKomadai();
-  } else if (phase==PHASE.Player1Sasu){
-    if(komaflag>=0) {
+  } else if (phase==PHASE.Player1Sasu) {
+    if (komaflag>=0) {
       if (komacatchflag==1&&motikomaflag!=0) {//持ち駒を手に取った場合   
         clickMyKomaUtu();
-      }
-      else{
+      } else {
         clickMyKomaSasu();
       }
-          {
-
-
-
-
- 
-
-                //ここで刺す
-                if (komacatchflag==0) {
-
-                  //駒成り
-                  if (y==1||komaYflag==1) {
-                    if (flag[x][y]==1)
-                    {
-                      flag[x][y]=7;//自分と
-                    }
-                    if (flag[x][y]==2)
-                    {
-                      phase=PHASE.Player1Narimachi;//flag[x][y]=10;//自分成銀
-                    }
-                    if (flag[x][y]==4)
-                    {
-                      flag[x][y]=8;//自分馬
-                    }
-                    if (flag[x][y]==5)
-                    {
-                      flag[x][y]=9;//自分龍
-                    }
-                  }
-                }
-                if (phase==PHASE.Player1Sasu) {
-                  println("人は"+hitokihuoutput(komaXflag, komaYflag, x, y, komaflag));
-                  kihu.add(hitokihuoutput(komaXflag, komaYflag, x, y, komaflag));
-
-                  komaflag=-1;
-                  teban=1-teban; 
-                  phase=PHASE.Player2Start;
-                  //手番変更
-                }
-              }
-
-              //draw();
-              //if (teban==1)
-              //{
-              //  makeKOMAmovelist();
-              //  enemystrategy();
-
-              //  komaflag=-1;
-              //}
-            }
-          }
-        }
-      }
-    }
     }
   } else if (phase==PHASE.Player1Narimachi) {
     if (mouseX<=1300&&mouseX>=1100&&mouseY<=600&&mouseY>=500) {                                                              //成り待ちのときのクリック処理 ダイアログのxとyの範囲

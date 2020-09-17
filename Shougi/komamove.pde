@@ -58,6 +58,7 @@ void clickMyKoma() {
           komaflag=flag[x][y];//クリックした駒を指す駒を指定する
           komaXflag=x;
           komaYflag=y;
+          komacatchflag=0;
           phase=PHASE.Player1Sasu;
         }
       }
@@ -66,6 +67,7 @@ void clickMyKoma() {
 }
 
 void clickMyKomadai() {
+  makeKOMAmovelist();//動かせるコマのリストをこのタイミングで作っておく。
   //指し手が完了するまで、motigoma1はいじらないほうがいいのでは？（→対応した）
   if (mouseX>1030&&mouseX<1130&&mouseY>630&&mouseY<730&&komacatchflag==0)//歩を使う
   {
@@ -266,7 +268,7 @@ boolean makeKOMAmovelist()
         }
       }
       for (int x=1; x<=5; x++) {
-        for (int y=2; y<=5; y++) {
+        for (int y=1; y<=4; y++) {
           if (flag[x][y]==0&&(x==dice2||dice2==6||dice2musidekiru)&&compsengo==1) {
             if (flag[x][1]!=11&&flag[x][2]!=11&&flag[x][3]!=11&&flag[x][4]!=11&&flag[x][5]!=11) {//二歩対策
               komamovelist.add(new komamove(11, 0, 0, x, y));
@@ -331,7 +333,7 @@ boolean makeKOMAmovelist()
         }
       }
       for (int x=1; x<=5; x++) {
-        for (int y=1; y<=4; y++) {
+        for (int y=2; y<=5; y++) {
           if (flag[x][y]==0&&(x==dice1||dice1==6||dice1musidekiru)&&compsengo==1) {
             if (flag[x][1]!=1&&flag[x][2]!=1&&flag[x][3]!=1&&flag[x][4]!=1&&flag[x][5]!=1) {//二歩対策
               komamovelist.add(new komamove(1, 0, 0, x, y));
@@ -399,7 +401,7 @@ void clickMyKomaUtu() {
     for (int y=0; y<7; y++) {// 1~5でよいのでは？
       if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260) {
         //合法手かどうかを判定する。
-        makeKOMAmovelist();//動かせるコマのリストをこのタイミングで作っておく。
+        //makeKOMAmovelist();//動かせるコマのリストをこのタイミングで作っておく。
         boolean gohoshu=false;
         for (int n=0; n<komamovelist.size(); n++) {
           komamove move=komamovelist.get(n);
@@ -414,7 +416,7 @@ void clickMyKomaUtu() {
           ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==1))&&gohoshu) {                                                              
           if (y>0) {//謎のフラグ条件（？？？）
             //このタイミングでコマ台を空にするという考え方もある。（→対応しました）
-            motigoma1[komaXflag][komaYflag]=0
+            motigoma1[komaXflag][komaYflag]=0;
             //ここで打つ
             flag[x][y]=motikomaflag;
             println("人は"+hitokihuoutput(0, 0, x, y, motikomaflag));
@@ -427,6 +429,7 @@ void clickMyKomaUtu() {
             komaYflag=-1;
             teban=1-teban;
             phase=PHASE.Player2Start;
+            return;
           }
         } else {
           komaflag=0;
@@ -451,33 +454,61 @@ void clickMyKomaSasu() {
           komaNariX=x;//これは何？
           komaNariY=y;
           //動かせるかチェック
-          flag[komaXflag][komaYflag]=0;
-          println("人は"+komaflag, komaXflag, komaYflag, x, y);
-          println("komacheck=", komacheck(komaflag, komaXflag, komaYflag, x, y));
-          println("teban=", teban);
+          //println("人は"+komaflag, komaXflag, komaYflag, x, y);
+          //println("komacheck=", komacheck(komaflag, komaXflag, komaYflag, x, y));
+          //println("teban=", teban);
           if (komacheck(komaflag, komaXflag, komaYflag, x, y)==false)
-          {
-            flag[komaXflag][komaYflag]=komaflag;
+          {//不正な動きならばやり直す。
             komaflag=0;//クリックやり直し待ち
             komaXflag=-1;
             komaYflag=-1;
             phase=PHASE.Player1Tenitoru;
-            return
+            return;
           }
-          //駒とる
-          if (teban==1) {//これはない
-            enemykomamove(x, y);//これはない
-          } else if (teban==0)//ここ?
-          {
-            mykomamove(x, y);
+          //駒を持ち上げる
+          flag[komaXflag][komaYflag]=0;
+          //相手の駒をとる
+          //if (teban==1) {//これはない
+          //  enemykomamove(x, y);//これはない
+          //} else if (teban==0)//ここ?
+          //{
+          komaToru(x, y);
+          //}
+          //ここで指す
+          flag[x][y]=komaflag;
+
+          //駒成り
+          if (y==1||komaYflag==1) {
+            if (flag[x][y]==1)
+            {
+              flag[x][y]=7;//自分と
+            }
+            if (flag[x][y]==2)
+            {
+              phase=PHASE.Player1Narimachi;//flag[x][y]=10;//自分成銀
+            }
+            if (flag[x][y]==4)
+            {
+              flag[x][y]=8;//自分馬
+            }
+            if (flag[x][y]==5)
+            {
+              flag[x][y]=9;//自分龍
+            }
           }
+          println("人は"+hitokihuoutput(komaXflag, komaYflag, x, y, komaflag));
+          kihu.add(hitokihuoutput(komaXflag, komaYflag, x, y, komaflag));
+
+          komaflag=-1;
+          teban=1-teban; 
+          phase=PHASE.Player2Start;
         }
       }
     }
   }
 }
 
-void mykomamove(x, y) {
+void komaToru(int x, int y) {
   if (flag[x][y]==11||flag[x][y]==17)//歩とる
   {
     if (motigoma1[0][0]==0)
@@ -533,6 +564,4 @@ void mykomamove(x, y) {
     //自分勝ち
     syouriflag=1;
   }
-  //ここで指す
-  flag[x][y]=komaflag;
 }

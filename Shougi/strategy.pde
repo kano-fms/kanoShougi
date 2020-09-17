@@ -1,4 +1,4 @@
-boolean enemystrategy() //<>// //<>// //<>// //<>// //<>// //<>//
+boolean enemystrategy() //<>// //<>// //<>// //<>// //<>//
 {
   Habu.strategy();
   

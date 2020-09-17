@@ -41,186 +41,39 @@ void draw()
   line(100, 580, 900, 580);
   line(100, 740, 900, 740);
 
-  for (int x=0; x<7; x++) {//動かせる位置の色変え
-    for (int y=0; y<7; y++) {
-      if (flag[x][y]==1&&komaflag==1) {//歩
-        fill(230, 180, 0);
-        if (flag[x][y-1]==0||flag[x][y-1]>10) {
-          rect((x-1)*160+100, (y-2)*160+100, 160, 160);
+  //指せる位置の色変え
+  if (phase==PHASE.Player1Sasu  && komacatchflag==0) {
+    int x=komaXflag;
+    int y=komaYflag;
+    if (komaflag>=1) {//
+      fill(230, 180, 0);
+      for(int n=0; n<komamovelist.size(); n++){
+        komamove move=komamovelist.get(n);
+        if(move.x1==x && move.y1==y){
+          rect((move.x2-1)*160+100, (move.y2-1)*160+100, 160, 160);
         }
-        fill(200, 125, 0);
       }
-      if (flag[x][y]==2&&komaflag==2) {//銀
-        fill(230, 180, 0);
-        if (flag[x][y-1]==0||flag[x][y-1]>10) {
-          rect((x-1)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x-1][y-1]==0||flag[x-1][y-1]>10) {
-          rect((x-2)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x+1][y-1]==0||flag[x+1][y-1]>10) {
-          rect(x*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x-1][y+1]==0||flag[x-1][y+1]>10) {
-          rect((x-2)*160+100, y*160+100, 160, 160);
-        }
-        if (flag[x+1][y+1]==0||flag[x+1][y+1]>10) {
-          rect(x*160+100, y*160+100, 160, 160);
-        }
-        fill(200, 125, 0);
-      }
-      if ((flag[x][y]==3&&komaflag==3)||(flag[x][y]==7&&komaflag==7)||(flag[x][y]==10&&komaflag==10)) {//金
-        fill(230, 180, 0);
-        if (flag[x][y-1]==0||flag[x][y-1]>10) {
-          rect((x-1)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x-1][y-1]==0||flag[x-1][y-1]>10) {
-          rect((x-2)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x+1][y-1]==0||flag[x+1][y-1]>10) {
-          rect(x*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x-1][y]==0||flag[x-1][y]>10) {
-          rect((x-2)*160+100, (y-1)*160+100, 160, 160);
-        }
-        if (flag[x+1][y]==0||flag[x+1][y]>10) {
-          rect(x*160+100, (y-1)*160+100, 160, 160);
-        }
-        if (flag[x][y+1]==0||flag[x][y+1]>10) {
-          rect((x-1)*160+100, y*160+100, 160, 160);
-        }
-        fill(200, 125, 0);
-      }
-      if (flag[x][y]==4&&komaflag==4) {//角
-        fill(230, 180, 0);
-        for (int d=0; d<4; d++) {
-          for (int n=0; n<6; n++) {
-            int xx=x+kakuX[d]*n;
-            int yy=y+kakuY[d]*n;
-            int f=flag[xx][yy];
-            if (f==-1) {
-              break;
-            } else if (f==0||f>10) {
-              rect((xx-1)*160+100, (yy-1)*160+100, 160, 160);
-              if (f>10)break;
-            }
-          }
-        }
-        fill(200, 125, 0);
-      }
-      if (flag[x][y]==5&&komaflag==5) {//飛
-        fill(230, 180, 0);
-        for (int d=0; d<4; d++) {
-          for (int n=0; n<6; n++) {
-            int xx=x+hishaX[d]*n;
-            int yy=y+hishaY[d]*n;
-            int f=flag[xx][yy];
-            if (f==-1) {
-              break;
-            } else if (f==0||f>10) {
-              rect((xx-1)*160+100, (yy-1)*160+100, 160, 160);
-              if (f>10)break;
-            }
-          }
-        }
-        fill(200, 125, 0);
-      }
-      if (flag[x][y]==6&&komaflag==6) {//王
-        fill(230, 180, 0);
-        if (flag[x][y-1]==0||flag[x][y-1]>10) {
-          rect((x-1)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x-1][y-1]==0||flag[x-1][y-1]>10) {
-          rect((x-2)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x+1][y-1]==0||flag[x+1][y-1]>10) {
-          rect(x*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x-1][y]==0||flag[x-1][y]>10) {
-          rect((x-2)*160+100, (y-1)*160+100, 160, 160);
-        }
-        if (flag[x+1][y]==0||flag[x+1][y]>10) {
-          rect(x*160+100, (y-1)*160+100, 160, 160);
-        }
-        if (flag[x][y+1]==0||flag[x][y+1]>10) {
-          rect((x-1)*160+100, y*160+100, 160, 160);
-        }
-        if (flag[x-1][y+1]==0||flag[x-1][y+1]>10) {
-          rect((x-2)*160+100, y*160+100, 160, 160);
-        }
-        if (flag[x+1][y+1]==0||flag[x+1][y+1]>10) {
-          rect(x*160+100, y*160+100, 160, 160);
-        }
-        fill(200, 125, 0);
-      }
-
-      if (flag[x][y]==8&&komaflag==8) {//馬
-        fill(230, 180, 0);
-        for (int d=0; d<4; d++) {
-          for (int n=0; n<6; n++) {
-            int xx=x+kakuX[d]*n;
-            int yy=y+kakuY[d]*n;
-            int f=flag[xx][yy];
-            if (f==-1) {
-              break;
-            } else if (f==0||f>10) {
-              rect((xx-1)*160+100, (yy-1)*160+100, 160, 160);
-              if (f>10)break;
-            }
-          }
-        }
-        if (flag[x][y-1]==0||flag[x][y-1]>10) {
-          rect((x-1)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x][y+1]==0||flag[x][y+1]>10) {
-          rect((x-1)*160+100, y*160+100, 160, 160);
-        }
-        if (flag[x-1][y]==0||flag[x-1][y]>10) {
-          rect((x-2)*160+100, (y-1)*160+100, 160, 160);
-        }
-        if (flag[x+1][y]==0||flag[x+1][y]>10) {
-          rect(x*160+100, (y-1)*160+100, 160, 160);
-        }
-        fill(200, 125, 0);
-      }
-
-      if (flag[x][y]==9&&komaflag==9) {//龍
-        fill(230, 180, 0);
-        for (int d=0; d<4; d++) {
-          for (int n=0; n<6; n++) {
-            int xx=x+hishaX[d]*n;
-            int yy=y+hishaY[d]*n;
-            int f=flag[xx][yy];
-            if (f==-1) {
-              break;
-            } else if (f==0||f>10) {
-              rect((xx-1)*160+100, (yy-1)*160+100, 160, 160);
-              if (f>10)break;
-            }
-          }
-        }
-        if (flag[x-1][y-1]==0||flag[x-1][y-1]>10) {
-          rect((x-2)*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x+1][y-1]==0||flag[x+1][y-1]>10) {
-          rect(x*160+100, (y-2)*160+100, 160, 160);
-        }
-        if (flag[x-1][y+1]==0||flag[x-1][y+1]>10) {
-          rect((x-2)*160+100, y*160+100, 160, 160);
-        }
-        if (flag[x+1][y+1]==0||flag[x+1][y+1]>10) {
-          rect(x*160+100, y*160+100, 160, 160);
-        }
-        fill(200, 125, 0);
-      }
+      fill(200, 125, 0);
     }
   }
-
+  //打てる位置の色変え
+  if (phase==PHASE.Player1Sasu  && komacatchflag==1) {//motikomaflag
+    if (motikomaflag>=1) {//
+      fill(230, 180, 0);
+      for(int n=0; n<komamovelist.size(); n++){
+        komamove move=komamovelist.get(n);
+        if(move.k==motikomaflag){
+          rect((move.x2-1)*160+100, (move.y2-1)*160+100, 160, 160);
+        }
+      }
+      fill(200, 125, 0);
+    }
+  }
   if (teban==0)
   {
-    ellipse(950, 850, 50, 50);//番確認
+    ellipse(950, 850, 50, 50);//手番確認
   } else if (teban==1) {
-    ellipse(950, 150, 50, 50);//
+    ellipse(950, 150, 50, 50);//手番確認
   }
 
   //持ち将棋駒
@@ -464,10 +317,6 @@ void draw()
   }
 
 
-  //駒描画
-  strokeWeight(2);
-  textSize(80);
-  fill(0);
 
   //サイコロ描画
   fill(255);
@@ -556,26 +405,11 @@ void draw()
     fill(255);
   }
 
+
+  //駒描画
+  strokeWeight(2);
+  textSize(80);
   fill(0);
-
-  //駒移動表示
-  //for (int x=0; x<7; x=x+1)
-  //{
-  //  for (int y=0; y<7; y=y+1)
-  //  {
-  //    if (komaflag==2||motikomaflag==2) {
-  //      x=mouseX-180;
-  //      y=mouseY-180;
-  //      line(x+180, y+130, x+140, y+150);
-  //      line(x+140, y+150, x+130, y+230);
-  //      line(x+130, y+230, x+230, y+230);
-  //      line(x+230, y+230, x+220, y+150);
-  //      line(x+220, y+150, x+180, y+130);
-  //      text("銀", x+140, y+220);
-  //    }
-  //  }
-  //}
-
   //駒自分
   for (int x=0; x<7; x=x+1)
   {
@@ -870,7 +704,7 @@ void draw()
   }
 
   if (phase==PHASE.Player1Narimachi) {
-    fill(255);                                                                     //成待ちダイアログ書く
+    fill(255);  //成待ちダイアログ書く
     rect(1100, 400, 400, 200);
     fill(0);
     line(1100, 500, 1500, 500);
