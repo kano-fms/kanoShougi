@@ -247,7 +247,9 @@ void mousePressed()
     {
       if (motigoma1[0][0]==1) {
         motikomaflag=1;
-        motigoma1[0][0]=0;
+        //motigoma1[0][0]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -256,7 +258,9 @@ void mousePressed()
     {
       if (motigoma1[1][0]==1) {
         motikomaflag=1;
-        motigoma1[1][0]=0;
+        //motigoma1[1][0]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -265,7 +269,9 @@ void mousePressed()
     {
       if (motigoma1[0][1]==1) {
         motikomaflag=2;
-        motigoma1[0][1]=0;
+        //motigoma1[0][1]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -274,7 +280,9 @@ void mousePressed()
     {
       if (motigoma1[1][1]==1) {
         motikomaflag=2;
-        motigoma1[1][1]=0;
+        //motigoma1[1][1]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -283,7 +291,9 @@ void mousePressed()
     {
       if (motigoma1[0][2]==1) {
         motikomaflag=3;
-        motigoma1[0][2]=0;
+        //motigoma1[0][2]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -292,7 +302,9 @@ void mousePressed()
     {
       if (motigoma1[1][2]==1) {
         motikomaflag=3;
-        motigoma1[1][2]=0;
+        //motigoma1[1][2]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -301,7 +313,9 @@ void mousePressed()
     {
       if (motigoma1[0][3]==1) {
         motikomaflag=4;
-        motigoma1[0][3]=0;
+        //motigoma1[0][3]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -310,7 +324,9 @@ void mousePressed()
     {
       if (motigoma1[1][3]==1) {
         motikomaflag=4;
-        motigoma1[1][3]=0;
+        //motigoma1[1][3]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -319,7 +335,9 @@ void mousePressed()
     {
       if (motigoma1[0][4]==1) {
         motikomaflag=5;
-        motigoma1[0][4]=0;
+        //motigoma1[0][4]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -328,7 +346,9 @@ void mousePressed()
     {
       if (motigoma1[1][4]==1) {
         motikomaflag=5;
-        motigoma1[1][4]=0;
+        //motigoma1[1][4]=0;
+        komaXflag=0;
+        komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -416,13 +436,35 @@ void mousePressed()
             if (((motikomaflag==1&&flag[x][y]==0&&(6-x)==dice1&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&(6-x)==dice1&&compsengo==0)
               ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&y>0&&compsengo==0)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==0)
               ||(motikomaflag==1&&flag[x][y]==0&&x==dice1&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&x==dice1&&compsengo==1)
-              
+
               ||(motikomaflag==1&&flag[x][y]==0&&dice1==6&&(6-y)>0&&compsengo==1)||(motikomaflag!=1&&flag[x][y]==0&&dice1==6&&compsengo==1))&&gohoshu) {                                                              
               if (y>0) {
 
                 flag[x][y]=motikomaflag;
                 println("人は"+hitokihuoutput(0, 0, x, y, motikomaflag));
                 kihu.add(hitokihuoutput(0, 0, x, y, motikomaflag));
+
+                if (motikomaflag==1&&motigoma1[1][0]==1) {//持ち駒使用削除
+                  motigoma1[1][0]=0;
+                } else if (motikomaflag==1&&motigoma1[0][0]==1) {
+                  motigoma1[0][0]=0;
+                } else if (motikomaflag==2&&motigoma1[1][1]==1) {
+                  motigoma1[1][1]=0;
+                } else if (motikomaflag==2&&motigoma1[0][1]==1) {
+                  motigoma1[0][1]=0;
+                } else if (motikomaflag==3&&motigoma1[1][2]==1) {
+                  motigoma1[1][2]=0;
+                } else if (motikomaflag==3&&motigoma1[0][2]==1) {
+                  motigoma1[0][2]=0;
+                } else if (motikomaflag==4&&motigoma1[1][3]==1) {
+                  motigoma1[1][3]=0;
+                } else if (motikomaflag==4&&motigoma1[0][3]==1) {
+                  motigoma1[0][3]=0;
+                } else if (motikomaflag==5&&motigoma1[1][4]==1) {
+                  motigoma1[1][4]=0;
+                } else if (motikomaflag==5&&motigoma1[0][4]==1) {
+                  motigoma1[0][4]=0;
+                }
 
                 motikomaflag=0;
                 komaflag=-1;
