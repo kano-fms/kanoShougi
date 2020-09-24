@@ -53,53 +53,12 @@ void setup()
 
   Habu=new agentHabu();
 
-  teban=0;//先手後手の入れ替え
-  compsengo=teban;
-  //phase = PHASE.Player2Start;
-
-  kihu= new ArrayList<String>();
+  resetboard(1);//先手後手の入れ替え
 
   hishaX=new int[]{1, 0, -1, 0};
   hishaY=new int[]{0, 1, 0, -1};
   kakuX=new int[]{1, 1, -1, -1};
   kakuY=new int[]{1, -1, 1, -1};
-
-  //駒リセット
-  for (int x=0; x<7; x=x+1)
-  {
-    for (int y=0; y<7; y=y+1)
-    {
-      koma[x][y]=0;
-      flag[x][y]=0;
-      if (x==0||x==6||y==0||y==6)
-      {
-        flag[x][y]=-1;
-      }
-    }
-  }
-
-  for (int x=0; x<2; x=x+1)
-  {
-    for (int y=0; y<5; y=y+1)
-    {
-      motigoma1[x][y]=0;
-      motigoma2[x][y]=0;
-    }
-  }
-
-  flag[1][4]=1;
-  flag[2][5]=3;
-  flag[3][5]=2;
-  flag[4][5]=4;
-  flag[5][5]=5;
-  flag[1][5]=6;
-
-  flag[5][2]=11;
-  flag[4][1]=13;
-  flag[3][1]=12;
-  flag[2][1]=14;
-  flag[1][1]=15;
-  flag[5][1]=16;
 }
 
 void keyPressed() {
@@ -186,7 +145,7 @@ void mousePressed()
   {
     if (mouseX>600&&mouseX<850&&mouseY>650&&mouseY<750)//もう一度　押す
     {
-      resetboard();
+      resetboard(2-syouriflag);
     }
 
     if (mouseX>850&&mouseX<1100&&mouseY>650&&mouseY<750)//止める　押す
@@ -259,7 +218,7 @@ void mousePressed()
       if (motigoma1[1][0]==1) {
         motikomaflag=1;
         //motigoma1[1][0]=0;
-        komaXflag=0;
+        komaXflag=1;
         komaYflag=0;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
@@ -271,7 +230,7 @@ void mousePressed()
         motikomaflag=2;
         //motigoma1[0][1]=0;
         komaXflag=0;
-        komaYflag=0;
+        komaYflag=1;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -281,8 +240,8 @@ void mousePressed()
       if (motigoma1[1][1]==1) {
         motikomaflag=2;
         //motigoma1[1][1]=0;
-        komaXflag=0;
-        komaYflag=0;
+        komaXflag=1;
+        komaYflag=1;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -293,7 +252,7 @@ void mousePressed()
         motikomaflag=3;
         //motigoma1[0][2]=0;
         komaXflag=0;
-        komaYflag=0;
+        komaYflag=2;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -303,8 +262,8 @@ void mousePressed()
       if (motigoma1[1][2]==1) {
         motikomaflag=3;
         //motigoma1[1][2]=0;
-        komaXflag=0;
-        komaYflag=0;
+        komaXflag=1;
+        komaYflag=2;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -315,7 +274,7 @@ void mousePressed()
         motikomaflag=4;
         //motigoma1[0][3]=0;
         komaXflag=0;
-        komaYflag=0;
+        komaYflag=3;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -325,8 +284,8 @@ void mousePressed()
       if (motigoma1[1][3]==1) {
         motikomaflag=4;
         //motigoma1[1][3]=0;
-        komaXflag=0;
-        komaYflag=0;
+        komaXflag=1;
+        komaYflag=3;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -337,7 +296,7 @@ void mousePressed()
         motikomaflag=5;
         //motigoma1[0][4]=0;
         komaXflag=0;
-        komaYflag=0;
+        komaYflag=4;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -347,8 +306,8 @@ void mousePressed()
       if (motigoma1[1][4]==1) {
         motikomaflag=5;
         //motigoma1[1][4]=0;
-        komaXflag=0;
-        komaYflag=0;
+        komaXflag=1;
+        komaYflag=4;
         komacatchflag=1;
         phase=PHASE.Player1Sasu;
       }
@@ -444,27 +403,7 @@ void mousePressed()
                 println("人は"+hitokihuoutput(0, 0, x, y, motikomaflag));
                 kihu.add(hitokihuoutput(0, 0, x, y, motikomaflag));
 
-                if (motikomaflag==1&&motigoma1[1][0]==1) {//持ち駒使用削除
-                  motigoma1[1][0]=0;
-                } else if (motikomaflag==1&&motigoma1[0][0]==1) {
-                  motigoma1[0][0]=0;
-                } else if (motikomaflag==2&&motigoma1[1][1]==1) {
-                  motigoma1[1][1]=0;
-                } else if (motikomaflag==2&&motigoma1[0][1]==1) {
-                  motigoma1[0][1]=0;
-                } else if (motikomaflag==3&&motigoma1[1][2]==1) {
-                  motigoma1[1][2]=0;
-                } else if (motikomaflag==3&&motigoma1[0][2]==1) {
-                  motigoma1[0][2]=0;
-                } else if (motikomaflag==4&&motigoma1[1][3]==1) {
-                  motigoma1[1][3]=0;
-                } else if (motikomaflag==4&&motigoma1[0][3]==1) {
-                  motigoma1[0][3]=0;
-                } else if (motikomaflag==5&&motigoma1[1][4]==1) {
-                  motigoma1[1][4]=0;
-                } else if (motikomaflag==5&&motigoma1[0][4]==1) {
-                  motigoma1[0][4]=0;
-                }
+                motigoma1[komaXflag][komaYflag]=0;
 
                 motikomaflag=0;
                 komaflag=-1;
@@ -479,7 +418,7 @@ void mousePressed()
             }
           } else if (komaflag>0)//盤上の駒をさす場合
           {
-
+            makeKOMAmovelist();
 
             println(komaflag, komaXflag, komaYflag, x, y);
             komaNariX=x;
