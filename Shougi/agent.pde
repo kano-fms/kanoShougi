@@ -17,7 +17,7 @@ class agentHabu {
     //return false;
     //}
     //if (number==-1) {
-    number=ootorarerunigeru();//王手をかけられてたら逃げる
+    number=ootorarerunigeru();//王手をかけられてたら逃げる  －1帰ってきたらコンピュータの王詰み
     //}
 
     if (number==-1) {

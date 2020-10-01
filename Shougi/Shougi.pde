@@ -1,3 +1,5 @@
+//make_player2kiki作る　変数名意味つける
+
 int [][] koma=new int [7][7];
 int [][] flag=new int [7][7];
 int [][] motigoma1=new int[2][6];
@@ -53,7 +55,7 @@ void setup()
 
   Habu=new agentHabu();
 
-  resetboard(1);//先手後手の入れ替え
+  resetboard(0);//先手後手の入れ替え
 
   hishaX=new int[]{1, 0, -1, 0};
   hishaY=new int[]{0, 1, 0, -1};
