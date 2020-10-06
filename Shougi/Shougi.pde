@@ -1,32 +1,32 @@
 //make_player2kiki作る　変数名意味つける
 
-int [][] koma=new int [7][7];
-int [][] flag=new int [7][7];
-int [][] motigoma1=new int[2][6];
-int [][] motigoma2=new int[2][6];
-int komaflag=-1;
-int motikomaflag=0;
-int komacatchflag=0;
-int komaXflag=0;
-int komaYflag=0;
-int komaNariX;
-int komaNariY;
-int h1=0;
+int [][] koma=new int [7][7];//使われてない
+int [][] flag=new int [7][7];//flag[][]の駒が何か判定
+int [][] motigoma1=new int[2][6];//プレイヤー1のmotigoma1[][]=1なら駒がある、0ならない
+int [][] motigoma2=new int[2][6];//プレイヤー2のmotigoma2[][]=1なら駒がある、0ならない
+int komaflag=-1;//盤面でクリックした駒が何か判定
+int motikomaflag=0;//持ち駒でクリックした駒が何か判定
+int komacatchflag=0;//持ち駒があるかどうか1ならある、0ならない
+int komaXflag=0;//クリックした駒の動かす前のx座標
+int komaYflag=0;//クリックした駒の動かす前のy座標
+int komaNariX;//自分成銀のx座標
+int komaNariY;//自分成銀のx座標
+int h1=0;//使われてない
 int teban=0;//0は自分、1は相手
 int compsengo=0;//0だとコンピューター後手
-int syouriflag=0;
-int [] hishaX;
+int syouriflag=0;//1なら自分勝ち、2なら自分負け
+int [] hishaX;//飛車動かす範囲所得のため使用
 int [] hishaY;
-int [] kakuX;
+int [] kakuX;//角行動かす範囲所得のため使用
 int [] kakuY;
-int dice1=1;
-int dice2=1;
-boolean dice1musidekiru;
-boolean dice2musidekiru;
-boolean autodice=false;
-int ownoute=0;
-int player1kiki[][] =new int [7][7];
-int player2kiki[][] =new int [7][7];
+int dice1=1;//自分サイコロの目
+int dice2=1;//相手サイコロの目
+boolean dice1musidekiru;//自分が王手かけられているかどうか判定
+boolean dice2musidekiru;//相手が王手かけられているかどうか判定
+boolean autodice=false;//使われていない
+int ownoute=0;//自分が王手かけられているかどうか判定
+int player1kiki[][] =new int [7][7];//player1kiki[][]にプレイヤー2の駒が来れるかどうか
+int player2kiki[][] =new int [7][7];//player2kiki[][]にプレイヤー1の駒が来れるかどうか
 ArrayList<String> kihu;
 PrintWriter file;
 agentHabu Habu;

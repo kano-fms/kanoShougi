@@ -804,6 +804,283 @@ void make_player1kiki(int [][] player1kiki) {
   }
 }
 
+void make_player2kiki(int [][] player2kiki) {
+  for (int x=0; x<7; x++)
+  {
+    for (int y=0; y<7; y++)
+    {
+      player2kiki[x][y]=0;
+    }
+  }
+  for (int x=0; x<7; x++)
+  {
+    for (int y=0; y<7; y++)
+    {
+      if (flag[x][y]==-1) player2kiki[x][y]=-1;
+
+      if (flag[x][y]==11) {//歩
+        player2kiki[x][y+1]=1;
+      }
+
+      if (flag[x][y]==12) {//銀
+        player2kiki[x][y+1]=1;
+        player2kiki[x-1][y-1]=1;
+        player2kiki[x+1][y-1]=1;
+        player2kiki[x-1][y+1]=1;
+        player2kiki[x+1][y+1]=1;
+      }
+
+      if (flag[x][y]==13||flag[x][y]==17||flag[x][y]==20) {//金
+        player2kiki[x][y+1]=1;
+        player2kiki[x-1][y+1]=1;
+        player2kiki[x+1][y+1]=1;
+        player2kiki[x-1][y]=1;
+        player2kiki[x+1][y]=1;
+        player2kiki[x][y-1]=1;
+      }
+
+      if (flag[x][y]==14) {//角
+        for (int s=1; x+s<7&&y+s<7; s++) {
+          //for (int t=s; y+t<7; t++) {
+          if (flag[x+s][y+s]>=11) {//player2の駒があれば
+
+            break;
+          } else if (flag[x+s][y+s]!=0) {//player1の駒があれば
+            player2kiki[x+s][y+s]=1;
+            break;
+          }
+
+          player2kiki[x+s][y+s]=1;
+          //}
+        }
+        for (int s=1; x-s>0&&y+s<7; s++) {
+          //for (int t=s; y+t<7; t++) {
+          if (flag[x-s][y+s]>=11) {
+
+            break;
+          } else if (flag[x-s][y+s]!=0) {
+            player2kiki[x-s][y+s]=1;
+            break;
+          }
+
+          player2kiki[x-s][y+s]=1;
+          //}
+        }
+        for (int s=1; x+s<7&&y-s>0; s++) {
+          //for (int t=s; y-t>0; t++) {
+          if (flag[x+s][y-s]>=11) {
+
+            break;
+          } else if (flag[x+s][y-s]!=0) {
+            player2kiki[x+s][y-s]=1;
+            break;
+          }
+
+          player2kiki[x+s][y-s]=1;
+          //}
+        }
+        for (int s=1; x-s>0&&y-s>0; s++) {
+          //for (int t=s; y-t>0; t++) {
+          if (flag[x-s][y-s]>=11) {
+
+            break;
+          } else if (flag[x-s][y-s]!=0) {
+            player2kiki[x-s][y-s]=1;
+            break;
+          }
+
+          player2kiki[x-s][y-s]=1;
+          //}
+        }
+      }
+
+      if (flag[x][y]==15) {//飛
+        for (int s=1; y+s<6; s++) {//下
+          //for (int t=s; y+t<7||y-t>0; t++) {                 
+          if (flag[x][y+s]>=11) {
+
+            break;
+          } else if (flag[x][y+s]!=0) {
+            player2kiki[x][y+s]=1;
+            break;
+          }
+          player2kiki[x][y+s]=1;
+
+          //}
+        }
+        for (int s=1; x-s>0; s++) {//左
+          //for (int t=s; y+t<7||y-t>0; t++) {
+          if (flag[x-s][y]>=11) {
+
+            break;
+          } else if (flag[x-s][y]!=0) {
+            player2kiki[x-s][y]=1;
+            break;
+          }
+          player2kiki[x-s][y]=1;
+
+
+          //}
+        }
+        for (int s=1; x+s<6; s++) {//右
+          //for (int t=s; y+t<7||y-t>0; t++) {
+          if (flag[x+s][y]>=11) {
+
+            break;
+          } else if (flag[x+s][y]!=0) {
+            player2kiki[x+s][y]=1;
+            break;
+          }
+          player2kiki[x+s][y]=1;
+
+          //}
+        }
+        for (int s=1; y-s>0; s++) {//上
+          //for (int t=s; y+t<7||y-t>0; t++) {
+          if (flag[x][y-s]>=11) {
+
+            break;
+          } else if (flag[x][y-s]!=0) {
+            player2kiki[x][y-s]=1;
+            break;
+          }
+          player2kiki[x][y-s]=1;
+          //}
+        }
+      }
+
+      if (flag[x][y]==16) {//王
+        player2kiki[x][y-1]=1;
+        player2kiki[x-1][y-1]=1;
+        player2kiki[x+1][y-1]=1;
+        player2kiki[x-1][y]=1;
+        player2kiki[x+1][y]=1;
+        player2kiki[x][y+1]=1;
+        player2kiki[x-1][y+1]=1;
+        player2kiki[x+1][y+1]=1;
+      }
+
+      if (flag[x][y]==18) {//馬
+        for (int s=1; x+s<7&&y+s<7; s++) {
+          //for (int t=s; y+t<7; t++) {
+          if (flag[x+s][y+s]>=11) {
+
+            break;
+          } else if (flag[x+s][y+s]!=0) {
+            player2kiki[x+s][y+s]=1;
+            break;
+          }
+
+          player2kiki[x+s][y+s]=1;
+          //}
+        }
+        for (int s=1; x-s>0&&y+s<7; s++) {
+          //for (int t=s; y+t<7; t++) {
+          if (flag[x-s][y+s]>=11) {
+
+            break;
+          } else if (flag[x-s][y+s]!=0) {
+            player2kiki[x-s][y+s]=1;
+            break;
+          }
+
+          player2kiki[x-s][y+s]=1;
+          //}
+        }
+        for (int s=1; x+s<7&&y-s>0; s++) {
+          //for (int t=s; y-t>0; t++) {
+          if (flag[x+s][y-s]>=11) {
+
+            break;
+          } else if (flag[x+s][y-s]!=0) {
+            player2kiki[x+s][y-s]=1;
+            break;
+          }
+
+          player2kiki[x+s][y-s]=1;
+          //}
+        }
+        for (int s=1; x-s>0&&y-s>0; s++) {
+          //for (int t=s; y-t>0; t++) {
+          if (flag[x-s][y-s]>=11) {
+
+            break;
+          } else if (flag[x-s][y-s]!=0) {
+            player2kiki[x-s][y-s]=1;
+            break;
+          }
+
+          player2kiki[x-s][y-s]=1;
+          //}
+        }
+        player2kiki[x][y-1]=1;
+        player2kiki[x-1][y]=1;
+        player2kiki[x+1][y]=1;
+        player2kiki[x][y+1]=1;
+      }
+
+      if (flag[x][y]==19) {//龍
+        for (int s=1; y+s<6; s++) {//下
+          //for (int t=s; y+t<7||y-t>0; t++) {                 
+          if (flag[x][y+s]>=11) {
+
+            break;
+          } else if (flag[x][y+s]!=0) {
+            player2kiki[x][y+s]=1;
+            break;
+          }
+          player2kiki[x][y+s]=1;
+
+          //}
+        }
+        for (int s=1; x-s>0; s++) {//左
+          //for (int t=s; y+t<7||y-t>0; t++) {
+          if (flag[x-s][y]>=11) {
+
+            break;
+          } else if (flag[x-s][y]!=0) {
+            player2kiki[x-s][y]=1;
+            break;
+          }
+          player2kiki[x-s][y]=1;
+
+
+          //}
+        }
+        for (int s=1; x+s<6; s++) {//右
+          //for (int t=s; y+t<7||y-t>0; t++) {
+          if (flag[x+s][y]>=11) {
+
+            break;
+          } else if (flag[x+s][y]!=0) {
+            player2kiki[x+s][y]=1;
+            break;
+          }
+          player2kiki[x+s][y]=1;
+
+          //}
+        }
+        for (int s=1; y-s>0; s++) {//上
+          //for (int t=s; y+t<7||y-t>0; t++) {
+          if (flag[x][y-s]>=11) {
+
+            break;
+          } else if (flag[x][y-s]!=0) {
+            player2kiki[x][y-s]=1;
+            break;
+          }
+          player2kiki[x][y-s]=1;
+          //}
+        }
+        player2kiki[x-1][y-1]=1;
+        player2kiki[x+1][y-1]=1;
+        player2kiki[x-1][y+1]=1;
+        player2kiki[x+1][y+1]=1;
+      }
+    }
+  }
+}
+
 //int enemykomause() {
 //  int n=-2;
 //  for (int x=1; x<6; x++) {
