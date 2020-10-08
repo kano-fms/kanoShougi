@@ -378,6 +378,8 @@ void mousePressed()
     }
   } else if (phase==PHASE.Player1Sasu&&komaflag>=0) {
 
+
+
     for (int x=0; x<7; x=x+1)
     {
       for (int y=0; y<7; y=y+1)
@@ -416,6 +418,10 @@ void mousePressed()
             } else {
               komaflag=0;
               //gohoshuでなかったら駒台に駒を戻す
+              motikomaflag=0;
+              komaXflag=-1;
+              komaYflag=-1;
+              komacatchflag=0;
               phase=PHASE.Player1Tenitoru;
             }
           } else if (komaflag>0)//盤上の駒をさす場合

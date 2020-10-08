@@ -99,6 +99,7 @@ boolean makeKOMAmovelist()
       for (int x=1; x<=5; x++) {
         for (int y=2; y<=5; y++) {//歩は最上段に打てない
           if (flag[x][y]==0&&((6-x)==dice1||dice1==6||dice1musidekiru)&&compsengo==0) {
+            println("通る"); //<>//
             if (flag[x][1]!=1&&flag[x][2]!=1&&flag[x][3]!=1&&flag[x][4]!=1&&flag[x][5]!=1) {//二歩対策
               komamovelist.add(new komamove(1, 0, 0, x, y));
             }

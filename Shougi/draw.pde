@@ -237,7 +237,7 @@ void draw()
       fill(230, 180, 0);
       for(int n=0; n<komamovelist.size(); n++){
         komamove move=komamovelist.get(n);
-        if(move.k==motikomaflag){
+        if(move.k==motikomaflag&&move.x1==0&&move.y1==0){
           rect((move.x2-1)*160+100, (move.y2-1)*160+100, 160, 160);
         }
       }
