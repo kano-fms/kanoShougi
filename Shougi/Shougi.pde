@@ -107,7 +107,7 @@ void keyPressed() {
       phase = PHASE.Player1Strategy;
     }//王手かけられてたらdice1=6
 
-    makeKOMAmovelist();
+    makeKOMAmovelist(teban);
     if (komamovelist.size()==0) {
       dice1=6;
     }
@@ -163,7 +163,7 @@ void mousePressed()
         dice1=6;
       }//王手かけられてたらdice1=6
 
-      makeKOMAmovelist();
+      makeKOMAmovelist(teban);
       if (komamovelist.size()==0) {
         dice1=6;
       }
@@ -387,7 +387,7 @@ void mousePressed()
         if (mouseX>(x-1)*160+100&&mouseX<(x-1)*160+260&&mouseY>(y-1)*160+100&&mouseY<(y-1)*160+260)
         {
           if (komacatchflag==1&&motikomaflag!=0) {//持ち駒を手に取った場合   
-            makeKOMAmovelist();
+            makeKOMAmovelist(teban);
             boolean gohoshu=false;
             for (int n=0; n<komamovelist.size(); n++) {
               komamove move=komamovelist.get(n);
@@ -426,7 +426,7 @@ void mousePressed()
             }
           } else if (komaflag>0)//盤上の駒をさす場合
           {
-            makeKOMAmovelist();
+            makeKOMAmovelist(teban);
 
             println(komaflag, komaXflag, komaYflag, x, y);
             komaNariX=x;

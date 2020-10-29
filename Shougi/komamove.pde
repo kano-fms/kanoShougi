@@ -10,10 +10,10 @@ class komamove {
 }
 
 ArrayList<komamove> komamovelist;
-boolean makeKOMAmovelist()
+boolean makeKOMAmovelist(int tb)
 {
   komamovelist=new ArrayList<komamove>();
-  int tb=teban;//自分は0,相手は1
+  //int tb=teban;//自分は0,相手は1
   for (int x=1; x<=5; x++) {
     for (int y=1; y<=5; y++) {
       if ((flag[x][y]<=10&&tb==0)||(flag[x][y]>10&&tb==1)) {                                                    

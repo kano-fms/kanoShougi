@@ -960,13 +960,13 @@ void draw()
 
   if (phase==PHASE.Player2Strategy) {
     byou=millis();
-    makeKOMAmovelist();
+    makeKOMAmovelist(teban);
     if (komamovelist.size()==0) {
       dice2=6;
-      makeKOMAmovelist();
+      makeKOMAmovelist(teban);
     }
     enemystrategy();
-    makeKOMAmovelist();//王手かかってるか判定
+    makeKOMAmovelist(teban);//王手かかってるか判定
     komaflag=-1;
     teban=0;
     phase = PHASE.Player1Start;
