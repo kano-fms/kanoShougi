@@ -194,11 +194,12 @@ int ootekaketerunigerareru() {
             return n;
           }
         }
+        return -2;
       }
     }
   }
 
-  return -1;
+  return -1;//プレイヤー1の王が詰んでいる
 }
 
 int ootorarerunigeru()

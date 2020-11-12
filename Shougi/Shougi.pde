@@ -1,5 +1,3 @@
-//make_player2kiki作る　変数名意味つける
-
 int [][] koma=new int [7][7];//使われてない
 int [][] flag=new int [7][7];//flag[][]の駒が何か判定
 int [][] motigoma1=new int[2][6];//プレイヤー1のmotigoma1[][]=1なら駒がある、0ならない

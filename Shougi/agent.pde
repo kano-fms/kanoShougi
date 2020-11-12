@@ -3,6 +3,7 @@ class agentHabu {
   }
 
   void strategy() {
+    makeKOMAmovelist(teban);
 
     //ランダムに選ぶ
     int count=komamovelist.size();
@@ -24,12 +25,82 @@ class agentHabu {
       number=ootoru();//王が取れたら取る
     }
 
+    //if (number==-1) {  //一手詰め  　　　　　　　komamovelistの中身が途中で書き換えられていることに問題あり
+
+    //  //プレイヤー2が試しに動かしてみる
+    //  int [][] flagcopy=new int[7][7];
+    //  int [][] motikomaflagcopy=new int[2][5];
+    //  for (int n=0; n<komamovelist.size(); n++) {
+    //    komamove move=komamovelist.get(n);
+
+    //    for (int xx=0; xx<7; xx++)
+    //    {
+    //      for (int yy=0; yy<7; yy++)
+    //      {
+    //        flagcopy[xx][yy]=flag[xx][yy];
+    //      }
+    //    }
+
+    //    for (int xx=0; xx<2; xx++)
+    //    {
+    //      for (int yy=0; yy<5; yy++)
+    //      {
+    //        motikomaflagcopy[xx][yy]=motigoma2[xx][yy];
+    //      }
+    //    }
+
+    //    if (move.x1!=0||move.y1!=0) {
+    //      int toru=flag[move.x2][move.y2];
+    //      flag[move.x2][move.y2]=move.k;
+    //      flag[move.x1][move.y1]=0;
+    //      if (ootekaketerunigerareru()==-2) {
+    //        number=n;
+
+    //        for (int xx=0; xx<7; xx++)
+    //        {
+    //          for (int yy=0; yy<7; yy++)
+    //          {
+    //            flag[xx][yy]=flagcopy[xx][yy];
+    //          }
+    //        }
+
+    //        for (int xx=0; xx<2; xx++)
+    //        {
+    //          for (int yy=0; yy<5; yy++)
+    //          {
+    //            motigoma2[xx][yy]=motikomaflagcopy[xx][yy];
+    //          }
+    //        }
+
+    //        break;
+    //      } else {
+    //        for (int xx=0; xx<7; xx++)
+    //        {
+    //          for (int yy=0; yy<7; yy++)
+    //          {
+    //            flag[xx][yy]=flagcopy[xx][yy];
+    //          }
+    //        }
+
+    //        for (int xx=0; xx<2; xx++)
+    //        {
+    //          for (int yy=0; yy<5; yy++)
+    //          {
+    //            motigoma2[xx][yy]=motikomaflagcopy[xx][yy];
+    //          }
+    //        }
+    //      }
+    //    }
+    //  }
+    //}
+
     while (number==-1)
     {
       number=(int)random(0, count);//ランダムに動かす
       number=ouzibakuyoke(number);//王が自爆してたら-1を返してループ
     }
     //if(number!=-2){
+    print(number+" "+komamovelist.size());
     komamove move=komamovelist.get(number);
     println("相手は,", move.k, move.x1, move.y1, move.x2, move.y2);
 
