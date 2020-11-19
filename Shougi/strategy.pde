@@ -104,9 +104,9 @@ boolean enemystrategy() //<>// //<>// //<>// //<>// //<>//
 
 int ootoru()
 {
-  for (int i=0; i<komamovelist.size(); i++ )
+  for (int i=0; i<komamovelist2.size(); i++ )
   {
-    komamove move=komamovelist.get(i);
+    komamove move=komamovelist2.get(i);
     if (flag[move.x2][move.y2]==6)
     {
       ownoute=1;
@@ -163,9 +163,9 @@ int ootekaketerunigerareru() {
     {
       if (player2kiki[x][y]==1&&flag[x][y]==6)//プレイヤー2がプレイヤー1に王手をかけてる
       {
-        makeKOMAmovelist(0);
-        for (int n=0; n<komamovelist.size(); n++) {
-          komamove move=komamovelist.get(n);
+        makeKOMAmovelist(0, komamovelist1);
+        for (int n=0; n<komamovelist1.size(); n++) {
+          komamove move=komamovelist1.get(n);
 
           //プレイヤー1が試しに動かしてみる
           int [][] flagtameshi=new int[7][7];
@@ -213,8 +213,8 @@ int ootorarerunigeru()
       if (flag[xxx][yyy]==16&&player1kiki[xxx][yyy]==1)//プレイヤー2に王手がかかっている
       {
 
-        for (int n=0; n<komamovelist.size(); n++) {
-          komamove move=komamovelist.get(n);
+        for (int n=0; n<komamovelist2.size(); n++) {
+          komamove move=komamovelist2.get(n);
 
           //プレイヤー2が試しに動かしてみる
           int [][] flagtameshi=new int[7][7];
@@ -253,7 +253,7 @@ int ootorarerunigeru()
 
 int ouzibakuyoke(int n) {//王が自爆してたら-1を返す
 
-  komamove move=komamovelist.get(n);
+  komamove move=komamovelist2.get(n);
   //player1kikiのデータはあるものと仮定
   if (move.k==16) {
     if (player1kiki[move.x2][move.y2]==1) {
@@ -267,20 +267,20 @@ int ouzibakuyoke(int n) {//王が自爆してたら-1を返す
 
 
 
-int FindMoveFromMovelist(int x1, int y1, int x2, int y2)
-{
-  for (int i=0; i<komamovelist.size(); i++ )
-  {
-    komamove move=komamovelist.get(i);
-    if (x1==move.x1&&y1==move.y1&&
-      x2==move.x2&&y2==move.y2)
-    {
-      return i;
-    }
-  }
+//int FindMoveFromMovelist(int x1, int y1, int x2, int y2)
+//{
+//  for (int i=0; i<komamovelist.size(); i++ )
+//  {
+//    komamove move=komamovelist.get(i);
+//    if (x1==move.x1&&y1==move.y1&&
+//      x2==move.x2&&y2==move.y2)
+//    {
+//      return i;
+//    }
+//  }
 
-  return -1;
-}
+//  return -1;
+//}
 
 boolean ootekakatteru() {//プレイヤー1がプレイヤー2に王手をかけてる
   //for (int y=0; y<7; y++)

@@ -9,10 +9,12 @@ class komamove {
   }
 }
 
-ArrayList<komamove> komamovelist;
-boolean makeKOMAmovelist(int tb)
+ArrayList<komamove> komamovelist1=new ArrayList<komamove>();
+ArrayList<komamove> komamovelist2=new ArrayList<komamove>();
+
+boolean makeKOMAmovelist(int tb, ArrayList<komamove> komamovelist)
 {
-  komamovelist=new ArrayList<komamove>();
+  komamovelist.clear(); //<>//
   //int tb=teban;//自分は0,相手は1
   for (int x=1; x<=5; x++) {
     for (int y=1; y<=5; y++) {

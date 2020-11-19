@@ -3,10 +3,10 @@ class agentHabu {
   }
 
   void strategy() {
-    makeKOMAmovelist(teban);
+    makeKOMAmovelist(teban, komamovelist2);
 
     //ランダムに選ぶ
-    int count=komamovelist.size();
+    int count=komamovelist2.size();
     if (count==0)
     {
       return ;
@@ -100,8 +100,8 @@ class agentHabu {
       number=ouzibakuyoke(number);//王が自爆してたら-1を返してループ
     }
     //if(number!=-2){
-    print(number+" "+komamovelist.size());
-    komamove move=komamovelist.get(number);
+    print(number+" "+komamovelist2.size());
+    komamove move=komamovelist2.get(number);
     println("相手は,", move.k, move.x1, move.y1, move.x2, move.y2);
 
     println("コンピューターは"+computerkihuoutput(move));

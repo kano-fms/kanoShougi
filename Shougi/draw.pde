@@ -222,8 +222,8 @@ void draw()
     int y=komaYflag;
     if (komaflag>=1) {//
       fill(230, 180, 0);
-      for(int n=0; n<komamovelist.size(); n++){
-        komamove move=komamovelist.get(n);
+      for(int n=0; n<komamovelist1.size(); n++){
+        komamove move=komamovelist1.get(n);
         if(move.x1==x && move.y1==y){
           rect((move.x2-1)*160+100, (move.y2-1)*160+100, 160, 160);
         }
@@ -235,8 +235,8 @@ void draw()
   if (phase==PHASE.Player1Sasu  && komacatchflag==1) {//motikomaflag
     if (motikomaflag>=1) {//
       fill(230, 180, 0);
-      for(int n=0; n<komamovelist.size(); n++){
-        komamove move=komamovelist.get(n);
+      for(int n=0; n<komamovelist1.size(); n++){
+        komamove move=komamovelist1.get(n);
         if(move.k==motikomaflag&&move.x1==0&&move.y1==0){
           rect((move.x2-1)*160+100, (move.y2-1)*160+100, 160, 160);
         }
@@ -960,13 +960,13 @@ void draw()
 
   if (phase==PHASE.Player2Strategy) {
     byou=millis();
-    makeKOMAmovelist(teban);
-    if (komamovelist.size()==0) {
+    makeKOMAmovelist(teban, komamovelist2);
+    if (komamovelist2.size()==0) {
       dice2=6;
-      makeKOMAmovelist(teban);
+      makeKOMAmovelist(teban, komamovelist2);
     }
     enemystrategy();
-    makeKOMAmovelist(teban);//王手かかってるか判定
+    makeKOMAmovelist(teban, komamovelist2);//王手かかってるか判定
     komaflag=-1;
     teban=0;
     phase = PHASE.Player1Start;
