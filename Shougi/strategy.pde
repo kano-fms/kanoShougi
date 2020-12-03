@@ -194,12 +194,12 @@ int ootekaketerunigerareru() {
             return n;
           }
         }
-        return -2;
+        return -2;//player1の王が詰んでいるとき
       }
     }
   }
 
-  return -1;//プレイヤー1の王が詰んでいる
+  return -1;//プレイヤー1の王に王手がかかっていないとき
 }
 
 int ootorarerunigeru()
@@ -260,7 +260,6 @@ int ouzibakuyoke(int n) {//王が自爆してたら-1を返す
       return -1;
     }
   }
-
   return n;
 }
 

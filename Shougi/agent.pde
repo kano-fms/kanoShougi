@@ -25,74 +25,74 @@ class agentHabu {
       number=ootoru();//王が取れたら取る
     }
 
-    //if (number==-1) {  //一手詰め  　　　　　　　komamovelistの中身が途中で書き換えられていることに問題あり
+    if (number==-1) {  //一手詰め  　　　　　　　komamovelistの中身が途中で書き換えられていることに問題あり
 
-    //  //プレイヤー2が試しに動かしてみる
-    //  int [][] flagcopy=new int[7][7];
-    //  int [][] motikomaflagcopy=new int[2][5];
-    //  for (int n=0; n<komamovelist.size(); n++) {
-    //    komamove move=komamovelist.get(n);
+      //プレイヤー2が試しに動かしてみる
+      int [][] flagcopy=new int[7][7];
+      int [][] motikomaflagcopy=new int[2][5];
+      for (int n=0; n<komamovelist2.size(); n++) {
+        komamove move=komamovelist2.get(n);
 
-    //    for (int xx=0; xx<7; xx++)
-    //    {
-    //      for (int yy=0; yy<7; yy++)
-    //      {
-    //        flagcopy[xx][yy]=flag[xx][yy];
-    //      }
-    //    }
+        for (int xx=0; xx<7; xx++)
+        {
+          for (int yy=0; yy<7; yy++)
+          {
+            flagcopy[xx][yy]=flag[xx][yy];
+          }
+        }
 
-    //    for (int xx=0; xx<2; xx++)
-    //    {
-    //      for (int yy=0; yy<5; yy++)
-    //      {
-    //        motikomaflagcopy[xx][yy]=motigoma2[xx][yy];
-    //      }
-    //    }
+        for (int xx=0; xx<2; xx++)
+        {
+          for (int yy=0; yy<5; yy++)
+          {
+            motikomaflagcopy[xx][yy]=motigoma2[xx][yy];
+          }
+        }
 
-    //    if (move.x1!=0||move.y1!=0) {
-    //      int toru=flag[move.x2][move.y2];
-    //      flag[move.x2][move.y2]=move.k;
-    //      flag[move.x1][move.y1]=0;
-    //      if (ootekaketerunigerareru()==-2) {
-    //        number=n;
+        if (move.x1!=0||move.y1!=0) {
+          int toru=flag[move.x2][move.y2];
+          flag[move.x2][move.y2]=move.k;
+          flag[move.x1][move.y1]=0;
+          if (ootekaketerunigerareru()==-2) {//player1の王が詰んでいる
+            number=n;
 
-    //        for (int xx=0; xx<7; xx++)
-    //        {
-    //          for (int yy=0; yy<7; yy++)
-    //          {
-    //            flag[xx][yy]=flagcopy[xx][yy];
-    //          }
-    //        }
+            for (int xx=0; xx<7; xx++)
+            {
+              for (int yy=0; yy<7; yy++)
+              {
+                flag[xx][yy]=flagcopy[xx][yy];//コピーを取ったものを元に戻す
+              }
+            }
 
-    //        for (int xx=0; xx<2; xx++)
-    //        {
-    //          for (int yy=0; yy<5; yy++)
-    //          {
-    //            motigoma2[xx][yy]=motikomaflagcopy[xx][yy];
-    //          }
-    //        }
+            for (int xx=0; xx<2; xx++)
+            {
+              for (int yy=0; yy<5; yy++)
+              {
+                motigoma2[xx][yy]=motikomaflagcopy[xx][yy];//コピーを取ったものを元に戻す
+              }
+            }
 
-    //        break;
-    //      } else {
-    //        for (int xx=0; xx<7; xx++)
-    //        {
-    //          for (int yy=0; yy<7; yy++)
-    //          {
-    //            flag[xx][yy]=flagcopy[xx][yy];
-    //          }
-    //        }
+            break;//33行目のfor文から脱出
+          } else {
+            for (int xx=0; xx<7; xx++)
+            {
+              for (int yy=0; yy<7; yy++)
+              {
+                flag[xx][yy]=flagcopy[xx][yy];//コピーを取ったものを元に戻す
+              }
+            }
 
-    //        for (int xx=0; xx<2; xx++)
-    //        {
-    //          for (int yy=0; yy<5; yy++)
-    //          {
-    //            motigoma2[xx][yy]=motikomaflagcopy[xx][yy];
-    //          }
-    //        }
-    //      }
-    //    }
-    //  }
-    //}
+            for (int xx=0; xx<2; xx++)
+            {
+              for (int yy=0; yy<5; yy++)
+              {
+                motigoma2[xx][yy]=motikomaflagcopy[xx][yy];//コピーを取ったものを元に戻す
+              }
+            }
+          }
+        }
+      }
+    }
 
     while (number==-1)
     {
@@ -170,7 +170,6 @@ class agentHabu {
       komaflag=move.k;
       enemykomamove(move.x2, move.y2);
     }
-
     //}
     return ;
   }
