@@ -111,27 +111,27 @@ int ootoru()
     {
       ownoute=1;
       return i;
-    } else if (flag[move.x2][move.y2]==5)
-    {
-      ownoute=0;
-      return i;
-    } else if (flag[move.x2][move.y2]==4)
-    {
-      ownoute=0;
-      return i;
-    } else if (flag[move.x2][move.y2]==3)
-    {
-      ownoute=0;
-      return i;
-    } else if (flag[move.x2][move.y2]==2)
-    {
-      ownoute=0;
-      return i;
-    } else if (flag[move.x2][move.y2]==1)
-    {
-      ownoute=0;
-      return i;
-    }
+    }// else if (flag[move.x2][move.y2]==5)
+    //{
+    //  ownoute=0;
+    //  return i;
+    //} else if (flag[move.x2][move.y2]==4)
+    //{
+    //  ownoute=0;
+    //  return i;
+    //} else if (flag[move.x2][move.y2]==3)
+    //{
+    //  ownoute=0;
+    //  return i;
+    //} else if (flag[move.x2][move.y2]==2)
+    //{
+    //  ownoute=0;
+    //  return i;
+    //} else if (flag[move.x2][move.y2]==1)
+    //{
+    //  ownoute=0;
+    //  return i;
+    //}
   }
   ownoute=0;
   return -1;
@@ -163,7 +163,7 @@ int ootekaketerunigerareru() {
     {
       if (player2kiki[x][y]==1&&flag[x][y]==6)//プレイヤー2がプレイヤー1に王手をかけてる
       {
-        makeKOMAmovelist(0, komamovelist1);
+        makeKOMAmovelist(0, komamovelist1); //<>//
         for (int n=0; n<komamovelist1.size(); n++) {
           komamove move=komamovelist1.get(n);
 

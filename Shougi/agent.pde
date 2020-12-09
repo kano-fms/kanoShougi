@@ -31,7 +31,7 @@ class agentHabu {
       int [][] flagcopy=new int[7][7];
       int [][] motikomaflagcopy=new int[2][5];
       for (int n=0; n<komamovelist2.size(); n++) {
-        komamove move=komamovelist2.get(n);
+        komamove move=komamovelist2.get(n); //<>//
 
         for (int xx=0; xx<7; xx++)
         {
@@ -49,11 +49,11 @@ class agentHabu {
           }
         }
 
-        if (move.x1!=0||move.y1!=0) {
+        if (move.x1!=0||move.y1!=0) { //<>//
           int toru=flag[move.x2][move.y2];
           flag[move.x2][move.y2]=move.k;
           flag[move.x1][move.y1]=0;
-          if (ootekaketerunigerareru()==-2) {//player1の王が詰んでいる
+          if (ootekaketerunigerareru()==-2) {//player1の王が詰んでいる //<>//
             number=n;
 
             for (int xx=0; xx<7; xx++)

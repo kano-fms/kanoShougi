@@ -14,15 +14,16 @@ ArrayList<komamove> komamovelist2=new ArrayList<komamove>();
 
 boolean makeKOMAmovelist(int tb, ArrayList<komamove> komamovelist)
 {
-  komamovelist.clear(); //<>//
+  komamovelist.clear();
   //int tb=teban;//自分は0,相手は1
   for (int x=1; x<=5; x++) {
     for (int y=1; y<=5; y++) {
-      if ((flag[x][y]<=10&&tb==0)||(flag[x][y]>10&&tb==1)) {                                                    
+      if ((flag[x][y]<=10&&tb==0)||(flag[x][y]>10&&tb==1)) { 
+        println("lllllllllllll");
         for (int s=1; s<=5; s++) {
           for (int t=1; t<=5; t++) {//(x,y)から(s,t)へ駒を動かせるかどうか
-            if (komacheck(flag[x][y], x, y, s, t)) {
-              //println(flag[x][y], x, y, s, t);//相手がどれを指したか
+            if (komacheck(flag[x][y], x, y, s, t, tb)) {
+              println(flag[x][y], x, y, s, t);//相手がどれを指したか
               komamovelist.add(new komamove(flag[x][y], x, y, s, t));
             }
           }
@@ -101,7 +102,7 @@ boolean makeKOMAmovelist(int tb, ArrayList<komamove> komamovelist)
       for (int x=1; x<=5; x++) {
         for (int y=2; y<=5; y++) {//歩は最上段に打てない
           if (flag[x][y]==0&&((6-x)==dice1||dice1==6||dice1musidekiru)&&compsengo==0) {
-            println("通る"); //<>//
+            println("通る");
             if (flag[x][1]!=1&&flag[x][2]!=1&&flag[x][3]!=1&&flag[x][4]!=1&&flag[x][5]!=1) {//二歩対策
               komamovelist.add(new komamove(1, 0, 0, x, y));
             }

@@ -105,7 +105,7 @@ void keyPressed() {
       phase = PHASE.Player1Strategy;
     }//王手かけられてたらdice1=6
 
-    makeKOMAmovelist(teban, komamovelist1); //<>//
+    makeKOMAmovelist(teban, komamovelist1);
     if (komamovelist1.size()==0) {
       dice1=6;
     }
@@ -432,9 +432,9 @@ void mousePressed()
 
             //動かせるかチェック
             flag[komaXflag][komaYflag]=0;
-            println(komacheck(komaflag, komaXflag, komaYflag, x, y));
+            println(komacheck(komaflag, komaXflag, komaYflag, x, y, teban));
             println(teban);
-            if (komacheck(komaflag, komaXflag, komaYflag, x, y)==false)
+            if (komacheck(komaflag, komaXflag, komaYflag, x, y, teban)==false)
             {
               flag[komaXflag][komaYflag]=komaflag;
               komaflag=0;//クリックやり直し待ち
@@ -635,30 +635,30 @@ void enemykomamove(int x, int y)
   //手番変更
 }
 
-boolean komacheck(int k, int x1, int y1, int x2, int y2 ) {
+boolean komacheck(int k, int x1, int y1, int x2, int y2, int tb) {
   if (syouriflag==1)return false;//勝敗結果後
   if (syouriflag==2)return false;//勝敗結果後
   if (flag[x2][y2]==-1)return false;
 
-  if (teban==0&&(6-x2)!=dice1&&dice1!=6&&compsengo==0)return false;                       //&&dice1musidekiru==false追加予定
-  if (teban==1&&(6-x2)!=dice2&&dice2!=6&&dice2musidekiru==false&&compsengo==0)return false;
+  if (tb==0&&(6-x2)!=dice1&&dice1!=6&&compsengo==0)return false;                       //&&dice1musidekiru==false追加予定
+  if (tb==1&&(6-x2)!=dice2&&dice2!=6&&dice2musidekiru==false&&compsengo==0)return false;
 
-  if (teban==0&&x2!=dice1&&dice1!=6&&compsengo==1)return false;                       //&&dice1musidekiru==false追加予定
-  if (teban==1&&x2!=dice2&&dice2!=6&&dice2musidekiru==false&&compsengo==1)return false;
+  if (tb==0&&x2!=dice1&&dice1!=6&&compsengo==1)return false;                       //&&dice1musidekiru==false追加予定
+  if (tb==1&&x2!=dice2&&dice2!=6&&dice2musidekiru==false&&compsengo==1)return false;
 
-  if (teban==0&&k>10)
+  if (tb==0&&k>10)
   {
     return false;
   }
-  if (teban==1&&k<=10)
+  if (tb==1&&k<=10)
   {
     return false;
   }
-  if (teban==0&&flag[x2][y2]>0&&flag[x2][y2]<=10)
+  if (tb==0&&flag[x2][y2]>0&&flag[x2][y2]<=10)
   {
     return false;
   }
-  if (teban==1&&flag[x2][y2]>10)
+  if (tb==1&&flag[x2][y2]>10)
   {
     return false;
   }
